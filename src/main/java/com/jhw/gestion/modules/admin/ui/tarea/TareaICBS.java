@@ -1,4 +1,4 @@
-package com.jhw.gestion.modules.admin.ui.proyecto;
+package com.jhw.gestion.modules.admin.ui.tarea;
 
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
@@ -11,16 +11,16 @@ import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
  *
  * @author Jesús Hernández Barrios (jhernandezb96@gmail.com)
  */
-public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
+public class TareaICBS extends InputComboBoxSelection<TareaDomain> {
 
-    public ProyectoICBS() {
-        super("Proyecto");
-        setIcon(KanbanModuleNavigator.ICON_PROYECTO);
+    public TareaICBS() {
+        super("Tarea");
+        setIcon(KanbanModuleNavigator.ICON_TAREA);
     }
 
     @Override
     public void updateComboBox() throws Exception {
-        setModel(KanbanSwingModule.proyectoUC.findAll());
+        setModel(KanbanSwingModule.tareaUC.findAll());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
     }
 
     private void onButtonAddActionPerformed() {
-        new DialogInputCBS(this, ProyectoInputView.from());
+        new DialogInputCBS(this, TareaInputView.from());
     }
 
 }

@@ -1,5 +1,6 @@
-package com.jhw.gestion.modules.admin.ui.proyecto;
+package com.jhw.gestion.modules.admin.ui.columna;
 
+import com.jhw.gestion.modules.admin.ui.proyecto.*;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
@@ -11,10 +12,10 @@ import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
  *
  * @author Jesús Hernández Barrios (jhernandezb96@gmail.com)
  */
-public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
+public class ColumnaICBS extends InputComboBoxSelection<ProyectoDomain> {
 
-    public ProyectoICBS() {
-        super("Proyecto");
+    public ColumnaICBS() {
+        super("Columna");
         setIcon(KanbanModuleNavigator.ICON_PROYECTO);
     }
 
@@ -34,7 +35,7 @@ public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
     }
 
     private void onButtonAddActionPerformed() {
-        new DialogInputCBS(this, ProyectoInputView.from());
+        new DialogInputCBS(this, ColumnaInputView.from());
     }
 
 }
