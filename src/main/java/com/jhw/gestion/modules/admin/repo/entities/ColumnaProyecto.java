@@ -104,15 +104,6 @@ public class ColumnaProyecto implements Serializable {
         this.orden = orden;
     }
 
-    @XmlTransient
-    public List<Tarea> getTareaList() {
-        return tareaList;
-    }
-
-    public void setTareaList(List<Tarea> tareaList) {
-        this.tareaList = tareaList;
-    }
-
     public Columna getColumnaFk() {
         return columnaFk;
     }

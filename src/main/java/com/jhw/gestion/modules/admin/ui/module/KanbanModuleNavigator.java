@@ -8,7 +8,7 @@ import com.jhw.swing.utils.icons.DerivableIcon;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class NominaModuleNavigator implements NavigationService {
+public class KanbanModuleNavigator implements NavigationService {
 
     public static final String NOMINA = "Nómina";
     public static final String CONTRATOS = "Contratos";
