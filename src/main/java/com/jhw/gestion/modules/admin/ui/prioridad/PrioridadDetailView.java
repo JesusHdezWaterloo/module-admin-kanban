@@ -17,9 +17,11 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 /**
+ * Usar PrioridadDetailMainPanel, mas chula
  *
  * @author Jesús Hernández Barrios (jhernandezb96@gmail.com)
  */
+@Deprecated
 public class PrioridadDetailView extends _MaterialPanelDetail<PrioridadDomain> {
 
     private static final String COL_NOMBRE = "Nombre";

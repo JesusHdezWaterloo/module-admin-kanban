@@ -3,12 +3,17 @@ package com.jhw.gestion.modules.admin.ui.module;
 import com.clean.swing.app.AbstractSwingApplication;
 import com.clean.swing.app.DefaultAbstractSwingMainModule;
 import com.clean.swing.app.dashboard.DashBoardSimple;
+import com.clean.swing.app.dashboard.DashboardConstants;
 import com.jhw.gestion.modules.admin.core.module.KanbanCoreModule;
 import com.jhw.gestion.modules.admin.core.usecase_def.*;
 import com.jhw.gestion.modules.admin.repo.module.KanbanRepoModule;
 import com.jhw.gestion.modules.admin.repo.utils.ResourcesKanban;
 import com.jhw.gestion.modules.admin.service.ResourceServiceImplementation;
+import com.jhw.gestion.modules.admin.ui.prioridad.PrioridadDetailMainPanel;
 import com.jhw.mysql.services.MySQLHandler;
+import com.jhw.swing.material.components.taskpane.CollapseMenu;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
 
 public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
 
@@ -47,17 +52,37 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
 
     private void registerMainElements(AbstractSwingApplication app) {
         DashBoardSimple dash = app.rootView().dashboard();
-        /*
-        CollapseMenu menu = new CollapseMenu(KanbanModuleNavigator.ICON_NOMINA, KanbanModuleNavigator.NOMINA);
+        CollapseMenu menu = new CollapseMenu(KanbanModuleNavigator.ICON_KANBAN, KanbanModuleNavigator.KANBAN);
         dash.addKeyValue(DashboardConstants.MAIN_ELEMENT, menu);
 
-        dash.addView(KanbanModuleNavigator.NAV_CONTRATOS, new ContratoEmpleadoDetailView());
-        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.CONTRATOS, KanbanModuleNavigator.ICON_CONTRATOS) {
+        /*for (KanbanProyectCreator c : KanbanProyectCreator.createKanbansProjects()) {
+            dash.addView(c.nav, c.view);
+            menu.addMenuItem(new AbstractAction(c.name, c.icon) {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    app.navigateTo(c.nav);
+                }
+            });
+        }
+
+        dash.addView(KanbanModuleNavigator.NAV_PROYECTO, new ProyectoDetailView());
+        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.PROYECTO, KanbanModuleNavigator.ICON_PROYECTO) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                app.navigateTo(KanbanModuleNavigator.NAV_CONTRATOS);
+                app.navigateTo(KanbanModuleNavigator.NAV_PROYECTO);
+            }
+        });*/
+
+        
+        dash.addView(KanbanModuleNavigator.NAV_PRIORIDAD, new PrioridadDetailMainPanel());
+        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.PRIORIDAD, KanbanModuleNavigator.ICON_PRIORIDAD) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.navigateTo(KanbanModuleNavigator.NAV_PRIORIDAD);
             }
         });
+        /*
+        
 
         dash.addView(KanbanModuleNavigator.NAV_EMPLEADOS, new EmpleadoMainPanel());
         menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.EMPLEADOS, KanbanModuleNavigator.ICON_EMPLEADOS) {

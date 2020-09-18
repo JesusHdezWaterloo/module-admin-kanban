@@ -10,11 +10,13 @@ import com.jhw.swing.utils.icons.DerivableIcon;
  */
 public class KanbanModuleNavigator implements NavigationService {
 
+    public static final String KANBAN = "Kanban";
     public static final String PROYECTO = "Proyecto";
     public static final String COLUMNA = "Columna";
     public static final String PRIORIDAD = "Prioridad";
     public static final String TAREA = "Tarea";
 
+    public static final DerivableIcon ICON_KANBAN = MaterialIcons.GRID_ON;
     public static final DerivableIcon ICON_PROYECTO = MaterialIcons.ACCOUNT_BOX;
     public static final DerivableIcon ICON_COLUMNA = MaterialIcons.ACCOUNT_BOX;
     public static final DerivableIcon ICON_PRIORIDAD = MaterialIcons.WARNING;
