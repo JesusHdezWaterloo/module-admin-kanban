@@ -97,15 +97,6 @@ public class Columna implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public List<ColumnaProyecto> getColumnaProyectoList() {
-        return columnaProyectoList;
-    }
-
-    public void setColumnaProyectoList(List<ColumnaProyecto> columnaProyectoList) {
-        this.columnaProyectoList = columnaProyectoList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
