@@ -19,45 +19,46 @@ import java.awt.event.ActionEvent;
 @Background_Force_Foreground
 @Foreground_Force_Icon
 public class PrioridadSingle extends _MaterialButton implements Update, BindableComponent<PrioridadDomain> {
-
+    
     public static PrioridadSingle from(PrioridadDomain prioridad) {
         PrioridadSingle p = MaterialSwingInjector.getImplementation(PrioridadSingle.class);
         p.setObject(prioridad);
         return p;
     }
-
+    
     private PrioridadDomain prioridad;
-
+    
     @Deprecated
     public PrioridadSingle() {
         addListeners();
     }
-
+    
     @Override
     public void update() {
         this.setText(prioridad.getNombrePrioridad());
+        this.setToolTipText(prioridad.getDescripcion());
         try {
             this.setBackground(new Color(prioridad.getColor()));
         } catch (Exception e) {
             this.setBackground(MaterialColors.TRANSPARENT);
         }
     }
-
+    
     private void addListeners() {
         this.addActionListener((ActionEvent e) -> {
             new DialogModelInput(PrioridadSingle.this, PrioridadInputView.fromModel(prioridad));
         });
     }
-
+    
     @Override
     public PrioridadDomain getObject() {
         return prioridad;
     }
-
+    
     @Override
     public void setObject(PrioridadDomain t) {
         this.prioridad = t;
         update();
     }
-
+    
 }

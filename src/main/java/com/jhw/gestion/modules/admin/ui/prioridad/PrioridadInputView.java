@@ -1,8 +1,9 @@
 package com.jhw.gestion.modules.admin.ui.prioridad;
 
-import com.jhw.gestion.modules.admin.ui.columna.*;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
+import com.jhw.swing.material.components.colorchooser.MaterialColorChooserFactory;
+import com.jhw.swing.material.components.colorchooser.MaterialColorChooserIcon;
 import com.jhw.swing.material.components.container.layout.VerticalLayoutContainer;
 import com.jhw.swing.material.components.textarea.MaterialTextArea;
 import com.jhw.swing.prepared.textarea.MaterialPreparedTextAreaFactory;
@@ -11,6 +12,7 @@ import com.jhw.swing.material.components.textfield.MaterialTextFieldIcon;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanCRUDInputView;
 import com.jhw.swing.prepared.textfield.MaterialPreparedTextFactory;
+import java.awt.Color;
 import java.util.Map;
 
 /**
@@ -42,22 +44,19 @@ public class PrioridadInputView extends CleanCRUDInputView<PrioridadDomain> {
         textFieldNombre.setIcon(MaterialIcons.PRIORITY_HIGH);
 
         textFieldValor = MaterialPreparedTextFactory.buildIntegerIcon();
-        textFieldValor.setIcon(MaterialIcons.ACCESS_ALARM);
+        textFieldValor.setIcon(MaterialIcons.EXPOSURE_PLUS_1);
         textFieldNombre.setHint("Valor para comparar");
         textFieldValor.setLabel("Valor");
 
-        textFieldColor = MaterialPreparedTextFactory.buildIntegerIcon();
-        textFieldColor.setIcon(MaterialIcons.ACCESS_ALARM);
-        textFieldColor.setHint("Valor del color");
-        textFieldColor.setLabel("Color");
-        
+        colorChooser = MaterialColorChooserFactory.buildIcon();
+
         textAreaDescripcion = MaterialPreparedTextAreaFactory.buildDescripcion();
 
         VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder();
 
         vlc.add(textFieldNombre);
         vlc.add(textFieldValor);
-        vlc.add(textFieldColor);
+        vlc.add(colorChooser);
         vlc.add(textAreaDescripcion, true);
 
         this.setComponent(vlc.build());
@@ -65,18 +64,32 @@ public class PrioridadInputView extends CleanCRUDInputView<PrioridadDomain> {
 
     // Variables declaration - do not modify
     private MaterialTextFieldIcon textFieldNombre;
-    private MaterialTextFieldIcon textFieldValor;
-    private MaterialTextFieldIcon textFieldColor;
+    private MaterialTextFieldIcon<Integer> textFieldValor;
+    private MaterialColorChooserIcon colorChooser;
     private MaterialTextArea textAreaDescripcion;
     // End of variables declaration
+
+    @Override
+    public void update() {
+        super.update();
+        if (getOldModel() != null) {
+            this.colorChooser.setObject(new Color(getOldModel().getColor()));
+        }
+    }
+
+    @Override
+    public PrioridadDomain getNewModel() throws Exception {
+        PrioridadDomain neww = super.getNewModel();
+        neww.setColor(colorChooser.getObject().getRGB());
+        return neww;
+    }
 
     @Override
     public Map<String, Object> bindFields() {
         Map<String, Object> map = super.bindFields();
         map.put("nombrePrioridad", textFieldNombre);
         map.put("descripcion", textAreaDescripcion);
-        map.put("valorComparable", textAreaDescripcion);
-        map.put("color", textAreaDescripcion);
+        map.put("valorComparable", textFieldValor);
         return map;
     }
 
