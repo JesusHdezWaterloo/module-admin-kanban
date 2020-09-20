@@ -72,7 +72,6 @@ public class PrioridadDetailMainPanel extends _MaterialPanel implements Update {
     }
 
     public void rellenarCuentas(List<PrioridadDomain> prioridades) {
-        System.out.println(prioridades.size());
         panelCuentasSingle.removeAll();
         for (PrioridadDomain cuenta : prioridades) {
             panelCuentasSingle.add(buildSingle(cuenta));
