@@ -3,9 +3,9 @@ package com.jhw.gestion.modules.admin.ui.tarea;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
-import java.awt.event.ActionListener;
-import com.jhw.swing.models.input.dialogs.DialogInputCBS;
 import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
+import com.jhw.swing.models.input.panels.ModelPanel;
+import java.util.List;
 
 /**
  *
@@ -14,27 +14,17 @@ import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
 public class TareaICBS extends InputComboBoxSelection<TareaDomain> {
 
     public TareaICBS() {
-        super("Tarea");
+        setLabel("Tarea");
         setIcon(KanbanModuleNavigator.ICON_TAREA);
     }
 
     @Override
-    public void updateComboBox() throws Exception {
-        setModel(KanbanSwingModule.tareaUC.findAll());
+    public List<TareaDomain> getList() throws Exception {
+        return KanbanSwingModule.tareaUC.findAll();
     }
 
     @Override
-    public ActionListener buttonAddAction() {
-        return new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonAddActionPerformed();
-            }
-        };
+    public ModelPanel<TareaDomain> inputPanel() {
+        return TareaInputView.from();
     }
-
-    private void onButtonAddActionPerformed() {
-        new DialogInputCBS(this, TareaInputView.from());
-    }
-
 }

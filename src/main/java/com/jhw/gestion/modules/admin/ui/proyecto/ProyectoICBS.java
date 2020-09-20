@@ -6,6 +6,8 @@ import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import java.awt.event.ActionListener;
 import com.jhw.swing.models.input.dialogs.DialogInputCBS;
 import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
+import com.jhw.swing.models.input.panels.ModelPanel;
+import java.util.List;
 
 /**
  *
@@ -14,27 +16,18 @@ import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
 public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
 
     public ProyectoICBS() {
-        super("Proyecto");
+        setLabel("Proyecto");
         setIcon(KanbanModuleNavigator.ICON_PROYECTO);
     }
 
     @Override
-    public void updateComboBox() throws Exception {
-        setModel(KanbanSwingModule.proyectoUC.findAll());
+    public List<ProyectoDomain> getList() throws Exception {
+        return KanbanSwingModule.proyectoUC.findAll();
     }
 
     @Override
-    public ActionListener buttonAddAction() {
-        return new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onButtonAddActionPerformed();
-            }
-        };
-    }
-
-    private void onButtonAddActionPerformed() {
-        new DialogInputCBS(this, ProyectoInputView.from());
+    public ModelPanel<ProyectoDomain> inputPanel() {
+        return ProyectoInputView.from();
     }
 
 }
