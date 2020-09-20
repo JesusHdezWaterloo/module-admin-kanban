@@ -5,6 +5,7 @@ import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.core.repo_def.*;
 import com.jhw.gestion.modules.admin.core.usecase_def.*;
 import com.jhw.gestion.modules.admin.core.module.KanbanCoreModule;
+import java.util.List;
 
 public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements TareaUseCase {
 
@@ -14,4 +15,9 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
         super.setRepo(repo);
     }
 
+
+    @Override
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectoDomain col) throws Exception {
+        return repo.findByColumnaProyecto(col);
+    }
 }
