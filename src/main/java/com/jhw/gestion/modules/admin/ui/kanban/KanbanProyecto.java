@@ -8,7 +8,6 @@ package com.jhw.gestion.modules.admin.ui.kanban;
 import com.clean.core.app.services.ExceptionHandler;
 import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectoDomain;
 import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
-import com.jhw.gestion.modules.admin.core.domain.TareaDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
 import com.jhw.utils.interfaces.Update;

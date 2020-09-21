@@ -16,13 +16,10 @@ import com.jhw.swing.material.components.container.panel._MaterialPanelComponent
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
 import com.jhw.swing.material.standards.MaterialFontRoboto;
-import com.jhw.swing.material.standards.MaterialShadow;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
