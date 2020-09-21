@@ -9,7 +9,9 @@ import com.jhw.gestion.modules.admin.core.usecase_def.*;
 import com.jhw.gestion.modules.admin.repo.module.KanbanRepoModule;
 import com.jhw.gestion.modules.admin.repo.utils.ResourcesKanban;
 import com.jhw.gestion.modules.admin.service.ResourceServiceImplementation;
+import com.jhw.gestion.modules.admin.ui.columna.ColumnaDetailView;
 import com.jhw.gestion.modules.admin.ui.prioridad.PrioridadDetailMainPanel;
+import com.jhw.gestion.modules.admin.ui.proyecto.ProyectoDetailView;
 import com.jhw.mysql.services.MySQLHandler;
 import com.jhw.swing.material.components.taskpane.CollapseMenu;
 import java.awt.event.ActionEvent;
@@ -55,7 +57,7 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
         CollapseMenu menu = new CollapseMenu(KanbanModuleNavigator.ICON_KANBAN, KanbanModuleNavigator.KANBAN);
         dash.addKeyValue(DashboardConstants.MAIN_ELEMENT, menu);
 
-        /*for (KanbanProyectCreator c : KanbanProyectCreator.createKanbansProjects()) {
+        for (KanbanProyectCreator c : KanbanProyectCreator.createKanbansProjects()) {
             dash.addView(c.nav, c.view);
             menu.addMenuItem(new AbstractAction(c.name, c.icon) {
                 @Override
@@ -71,9 +73,16 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
             public void actionPerformed(ActionEvent e) {
                 app.navigateTo(KanbanModuleNavigator.NAV_PROYECTO);
             }
-        });*/
+        });
 
-        
+        dash.addView(KanbanModuleNavigator.NAV_COLUMNA, new ColumnaDetailView());
+        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.COLUMNA, KanbanModuleNavigator.ICON_COLUMNA) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                app.navigateTo(KanbanModuleNavigator.NAV_COLUMNA);
+            }
+        });
+
         dash.addView(KanbanModuleNavigator.NAV_PRIORIDAD, new PrioridadDetailMainPanel());
         menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.PRIORIDAD, KanbanModuleNavigator.ICON_PRIORIDAD) {
             @Override

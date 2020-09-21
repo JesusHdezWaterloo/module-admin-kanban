@@ -6,9 +6,11 @@
 package com.jhw.gestion.modules.admin.ui.tarea;
 
 import com.jhw.gestion.modules.admin.core.domain.TareaDomain;
+import com.jhw.swing.material.components.button._MaterialButton;
 import com.jhw.swing.material.components.container.panel._MaterialPanel;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
+import com.jhw.swing.material.injection.MaterialSwingInjector;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
@@ -19,6 +21,10 @@ import javax.swing.border.Border;
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
 public class TareaSimplePanel extends _MaterialPanel implements Update {
+
+    public static TareaSimplePanel from(TareaDomain tarea) {
+        return new TareaSimplePanel(tarea);
+    }
 
     private final TareaDomain tarea;
 

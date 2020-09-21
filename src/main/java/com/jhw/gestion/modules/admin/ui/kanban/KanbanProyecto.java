@@ -5,12 +5,14 @@
  */
 package com.jhw.gestion.modules.admin.ui.kanban;
 
-import com.jhw.gestion.modules.admin.core.domain.ColumnaDomain;
+import com.clean.core.app.services.ExceptionHandler;
 import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectoDomain;
 import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
+import com.jhw.gestion.modules.admin.core.domain.TareaDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
 import com.jhw.utils.interfaces.Update;
+import java.awt.GridLayout;
 import java.util.List;
 
 /**
@@ -29,14 +31,27 @@ public class KanbanProyecto extends _PanelGradient implements Update {
         this.proyecto = proyecto;
     }
 
-    private void initComponents() {
-        List<ColumnaProyectoDomain> columnas = KanbanSwingModule.columnaProyectoUC.findByProyecto(proyecto);
-
-    }
-
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        updateColumns();
     }
 
+    private void updateColumns() {
+        try {
+            this.removeAll();//quito todo
+
+            //busco las columnas
+            List<ColumnaProyectoDomain> columnas = KanbanSwingModule.columnaProyectoUC.findByProyecto(proyecto);
+
+            //pongo el layout en dependencia de las columnas
+            this.setLayout(new GridLayout(1, columnas.size()));
+
+            //relleno las columnas
+            for (ColumnaProyectoDomain c : columnas) {
+                this.add(KanbanColumn.from(c));
+            }
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
+    }
 }
