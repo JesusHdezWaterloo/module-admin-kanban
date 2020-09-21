@@ -10,24 +10,22 @@ import com.jhw.personalization.core.domain.Personalization;
 import com.jhw.personalization.services.PersonalizationHandler;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
 import com.jhw.swing.material.components.button.MaterialButtonsFactory;
-import com.jhw.swing.material.components.button._MaterialButton;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
-import com.jhw.swing.material.components.container.panel._MaterialPanel;
+import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
-import com.jhw.swing.material.injection.MaterialSwingInjector;
+import com.jhw.swing.material.standards.MaterialFontRoboto;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
+import javax.swing.SwingConstants;
 
 /**
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class TareaSimplePanel extends _MaterialPanel implements Update {
+public class TareaSimplePanel extends _MaterialPanelComponent implements Update {
 
     public static TareaSimplePanel from(TareaDomain tarea) {
         return new TareaSimplePanel(tarea);
@@ -42,11 +40,17 @@ public class TareaSimplePanel extends _MaterialPanel implements Update {
     }
 
     private void initComponents() {
+        setGap(0);
         this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         header = MaterialLabelsFactory.build();
-        this.add(header, BorderLayout.NORTH);
+        header.setFont(MaterialFontRoboto.BOLD.deriveFont(20f));
+        header.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel up = MaterialContainersFactory.buildPanelTransparent();
+        up.setLayout(new BorderLayout());
+        up.add(header);
+        this.add(up, BorderLayout.NORTH);
 
         buttonEdit = MaterialButtonsFactory.buildIconTransparent();
         buttonEdit.setRippleColor(PersonalizationHandler.getColor(Personalization.KEY_COLOR_BUTTON_EDIT));

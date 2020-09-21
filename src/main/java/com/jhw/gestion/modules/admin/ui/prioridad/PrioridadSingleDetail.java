@@ -18,10 +18,10 @@ import java.awt.event.ActionEvent;
  */
 @Background_Force_Foreground
 @Foreground_Force_Icon
-public class PrioridadSingle extends _MaterialButton implements Update, BindableComponent<PrioridadDomain> {
+public class PrioridadSingleDetail extends _MaterialButton implements Update, BindableComponent<PrioridadDomain> {
     
-    public static PrioridadSingle from(PrioridadDomain prioridad) {
-        PrioridadSingle p = MaterialSwingInjector.getImplementation(PrioridadSingle.class);
+    public static PrioridadSingleDetail from(PrioridadDomain prioridad) {
+        PrioridadSingleDetail p = MaterialSwingInjector.getImplementation(PrioridadSingleDetail.class);
         p.setObject(prioridad);
         return p;
     }
@@ -29,7 +29,7 @@ public class PrioridadSingle extends _MaterialButton implements Update, Bindable
     private PrioridadDomain prioridad;
     
     @Deprecated
-    public PrioridadSingle() {
+    public PrioridadSingleDetail() {
         addListeners();
     }
     
@@ -46,7 +46,7 @@ public class PrioridadSingle extends _MaterialButton implements Update, Bindable
     
     private void addListeners() {
         this.addActionListener((ActionEvent e) -> {
-            new DialogModelInput(PrioridadSingle.this, PrioridadInputView.fromModel(prioridad));
+            new DialogModelInput(PrioridadSingleDetail.this, PrioridadInputView.fromModel(prioridad));
         });
     }
     

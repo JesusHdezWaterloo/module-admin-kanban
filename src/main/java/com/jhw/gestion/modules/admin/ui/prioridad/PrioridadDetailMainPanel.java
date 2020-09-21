@@ -82,8 +82,8 @@ public class PrioridadDetailMainPanel extends _MaterialPanel implements Update {
         this.repaint();
     }
 
-    protected PrioridadSingle buildSingle(PrioridadDomain prioridad) {
-        return PrioridadSingle.from(prioridad);
+    protected PrioridadSingleDetail buildSingle(PrioridadDomain prioridad) {
+        return PrioridadSingleDetail.from(prioridad);
     }
 
     private void addListeners() {
