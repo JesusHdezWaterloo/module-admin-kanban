@@ -104,7 +104,7 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
 
     @Override
     public String toString() {
-        return codigoTarea + " - " + nombreTarea;
+        return codigoTarea + ": " + nombreTarea;
     }
 
     @Override

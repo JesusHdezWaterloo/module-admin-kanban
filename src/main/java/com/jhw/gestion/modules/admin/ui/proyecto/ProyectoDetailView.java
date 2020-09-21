@@ -1,72 +1,65 @@
-package com.jhw.gestion.modules.admin.ui.empleado;
+package com.jhw.gestion.modules.admin.ui.proyecto;
 
 import com.clean.core.app.services.ExceptionHandler;
-import com.jhw.gestion.modules.admin.core.domain.EmpleadoDomain;
-import com.jhw.gestion.modules.admin.ui.contrato_empleado.ContratoEmpleadoInputView;
-import com.jhw.gestion.modules.admin.ui.module.NominaModuleNavigator;
-import com.jhw.gestion.modules.admin.ui.module.NominaSwingModule;
-import com.jhw.swing.material.standards.MaterialIcons;
+import com.jhw.gestion.modules.admin.core.domain.*;
+import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
+import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.models.detail._MaterialPanelDetail;
 import com.jhw.swing.material.components.table.Column;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 
 /**
  *
  * @author Jesús Hernández Barrios (jhernandezb96@gmail.com)
  */
-public class EmpleadoDetailView extends _MaterialPanelDetail<EmpleadoDomain> {
+public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
 
     private static final String COL_NOMBRE = "Nombre";
-    private static final String COL_CI = "Carnet";
-    private static final String COL_TELEFONO = "Teléfono";
+    private static final String COL_DESC = "Descripción";
 
-    public EmpleadoDetailView() {
+    public ProyectoDetailView() {
         super(
                 Column.builder().name(COL_NOMBRE).build(),
-                Column.builder().name(COL_CI).build(),
-                Column.builder().name(COL_TELEFONO).build()
+                Column.builder().name(COL_DESC).build()
         );
 
         this.personalize();
     }
 
     private void personalize() {
-        addActionsExtra();
-        
-        this.setHeaderText("Empleados");
-        this.setIcon(NominaModuleNavigator.ICON_EMPLEADOS);
-        
+        //addActionsExtra();
+
+        this.setHeaderText("Proyectos activos");
+        this.setIcon(KanbanModuleNavigator.ICON_PROYECTO);
+
         this.setActionColumnButtonsVisivility(true, true, false);//no pone el view, no esta implementado todavia
     }
 
     @Override
     public void update() {
         try {
-            setCollection(NominaSwingModule.empleadoUC.findAll());
+            setCollection(KanbanSwingModule.proyectoUC.findAll());
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
     }
 
     @Override
-    public Object[] getRowObject(EmpleadoDomain obj) {
+    public Object[] getRowObject(ProyectoDomain obj) {
         return new Object[]{
-            obj.getNombreEmpleado(),
-            obj.getCi(),
-            obj.getTelefono()};
+            obj.getNombreProyecto(),
+            obj.getDescripcion()};
     }
 
     @Override
     protected void buttonNuevoActionListener() {
-        new DialogModelInput(this, EmpleadoInputView.from());
+        new DialogModelInput(this, ProyectoInputView.from());
     }
 
     @Override
-    protected EmpleadoDomain deleteAction(EmpleadoDomain obj) {
+    protected ProyectoDomain deleteAction(ProyectoDomain obj) {
         try {
-            return NominaSwingModule.empleadoUC.destroy(obj);
+            return KanbanSwingModule.proyectoUC.destroy(obj);
         } catch (Exception ex) {
             ExceptionHandler.handleException(ex);
         }
@@ -74,15 +67,15 @@ public class EmpleadoDetailView extends _MaterialPanelDetail<EmpleadoDomain> {
     }
 
     @Override
-    protected void editAction(EmpleadoDomain obj) {
-        new DialogModelInput(this, EmpleadoInputView.fromModel(obj));
+    protected void editAction(ProyectoDomain obj) {
+        new DialogModelInput(this, ProyectoInputView.fromModel(obj));
     }
 
     @Override
-    protected void viewAction(EmpleadoDomain obj) {
+    protected void viewAction(ProyectoDomain obj) {
         System.out.println("NO NECESARIO TODAVÍA.");
     }
-
+    /*
     private void addActionsExtra() {
         this.addActionExtra(new AbstractAction("Contratar", MaterialIcons.ASSIGNMENT_IND.deriveIcon(18f)) {
             @Override
@@ -94,5 +87,5 @@ public class EmpleadoDetailView extends _MaterialPanelDetail<EmpleadoDomain> {
 
     private void onContratarEmpleadoActionPerformed() {
         new DialogModelInput(this, ContratoEmpleadoInputView.from(getSelectedElement()));
-    }
+    }*/
 }
