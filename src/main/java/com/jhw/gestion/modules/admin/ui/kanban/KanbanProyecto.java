@@ -29,6 +29,7 @@ public class KanbanProyecto extends _PanelGradient implements Update {
 
     public KanbanProyecto(ProyectoDomain proyecto) {
         this.proyecto = proyecto;
+        update();
     }
 
     @Override

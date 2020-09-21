@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jhw.gestion.modules.admin.ui.tarea;
+package com.jhw.gestion.modules.admin.ui.kanban;
 
 import com.jhw.gestion.modules.admin.core.domain.TareaDomain;
 import com.jhw.swing.material.components.button._MaterialButton;
