@@ -9,9 +9,12 @@ import com.clean.core.app.services.ExceptionHandler;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.button.MaterialButton;
+import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import com.jhw.swing.material.components.container.layout.VerticalLayoutContainer;
 import com.jhw.swing.material.components.container.panel.*;
 import com.jhw.swing.material.components.labels.*;
+import com.jhw.swing.material.components.scrollpane.MaterialScrollFactory;
+import com.jhw.swing.material.components.scrollpane.MaterialScrollPane;
 import com.jhw.swing.material.injection.MaterialSwingInjector;
 import com.jhw.swing.material.standards.MaterialColors;
 import com.jhw.swing.material.standards.MaterialShadow;
@@ -24,6 +27,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -53,8 +57,22 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
         header = KanbanColumnHeader.from(columna);
         this.add(header, BorderLayout.NORTH);
+
+        panelTareas = MaterialContainersFactory.buildPanelTransparent();
+
+        //----------------con scroll----------------
+        MaterialScrollPane scroll = MaterialScrollFactory.buildPane();
+        scroll.remove(scroll.getHorizontalScrollBar());
+        scroll.setViewportView(panelTareas);
+        this.add(scroll);
+        //----------------con scroll----------------
+
+        //----------------sin scroll----------------
+        //this.add(panelTareas);
+        //----------------sin scroll----------------
     }
     private KanbanColumnHeader header;
+    private JPanel panelTareas;
 
     private void addAction() {
     }
@@ -66,14 +84,13 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private void updateColumn() {
         try {
-            List<TareaDomain> tareas = KanbanSwingModule.tareaUC.findByColumnaProyecto(columna);
-            VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder();
+            VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder((int) panelTareas.getPreferredSize().getWidth());
 
-            for (TareaDomain tarea : tareas) {
+            for (TareaDomain tarea : KanbanSwingModule.tareaUC.findByColumnaProyecto(columna)) {
                 vlcTareas.add(TareaSimplePanel.from(tarea));
             }
 
-            this.add(vlcTareas.build());
+            panelTareas.add(vlcTareas.build());
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
@@ -118,7 +135,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         private MaterialButtonAddEdit buttonAdd;
 
         public void setHeader(String text) {
-            labelHeader.setText(text.toUpperCase());
+            labelHeader.setObject(text.toUpperCase());
         }
 
         public void addActionListenerButtonAdd(ActionListener listener) {
