@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-@SortBy(priority = {"nombreColumna"})
+@SortBy(priority = {"nombreProyecto"})
 public class ProyectoDomain extends EntityDomainObjectValidated {
 
     private Integer idProyecto;
