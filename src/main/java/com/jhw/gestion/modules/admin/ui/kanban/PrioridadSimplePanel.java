@@ -6,33 +6,28 @@
 package com.jhw.gestion.modules.admin.ui.kanban;
 
 import com.jhw.gestion.modules.admin.core.domain.PrioridadDomain;
-import com.jhw.swing.material.components.container.panel._MaterialPanel;
 import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
-import com.jhw.swing.material.standards.MaterialFontRoboto;
+import com.jhw.swing.util.interfaces.BindableComponent;
 import com.jhw.utils.interfaces.Update;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 /**
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class PrioridadSimplePanel extends _MaterialPanelComponent implements Update {
+public class PrioridadSimplePanel extends _MaterialPanelComponent implements Update, BindableComponent<PrioridadDomain> {
 
-    public static PrioridadSimplePanel from(PrioridadDomain prioridad) {
-        return new PrioridadSimplePanel(prioridad);
+    public static PrioridadSimplePanel from() {
+        return new PrioridadSimplePanel();
     }
 
-    private final PrioridadDomain prioridad;
+    private PrioridadDomain prioridad;
 
-    public PrioridadSimplePanel(PrioridadDomain prioridad) {
-        this.prioridad = prioridad;
+    public PrioridadSimplePanel() {
         initComponents();
-        update();
     }
 
     private void initComponents() {
@@ -45,6 +40,10 @@ public class PrioridadSimplePanel extends _MaterialPanelComponent implements Upd
     }
     private MaterialLabel labelPrioridad;
 
+    public void setPrioridad(PrioridadDomain prioridad) {
+        this.prioridad = prioridad;
+    }
+
     @Override
     public void update() {
         Color back = new Color(prioridad.getColor());
@@ -55,5 +54,16 @@ public class PrioridadSimplePanel extends _MaterialPanelComponent implements Upd
         this.setToolTipText(prioridad.getDescripcion());
 
         this.setBackground(back);
+    }
+
+    @Override
+    public PrioridadDomain getObject() {
+        return prioridad;
+    }
+
+    @Override
+    public void setObject(PrioridadDomain t) {
+        prioridad = t;
+        update();
     }
 }
