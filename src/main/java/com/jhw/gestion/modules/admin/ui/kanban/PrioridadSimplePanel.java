@@ -10,9 +10,11 @@ import com.jhw.swing.material.components.container.panel._MaterialPanel;
 import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
+import com.jhw.swing.material.standards.MaterialFontRoboto;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 /**
@@ -30,9 +32,11 @@ public class PrioridadSimplePanel extends _MaterialPanelComponent implements Upd
     public PrioridadSimplePanel(PrioridadDomain prioridad) {
         this.prioridad = prioridad;
         initComponents();
+        update();
     }
 
     private void initComponents() {
+        setGap(5);
         labelPrioridad = MaterialLabelsFactory.build();
         labelPrioridad.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -47,6 +51,8 @@ public class PrioridadSimplePanel extends _MaterialPanelComponent implements Upd
 
         labelPrioridad.setBackground(back);
         labelPrioridad.setObject(prioridad.getNombrePrioridad());
+
+        this.setToolTipText(prioridad.getDescripcion());
 
         this.setBackground(back);
     }
