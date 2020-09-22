@@ -27,4 +27,10 @@ public class TareaICBS extends InputComboBoxSelection<TareaDomain> {
     public ModelPanel<TareaDomain> inputPanel() {
         return TareaInputView.from();
     }
+
+    @Override
+    protected void addPropertyChange() {
+        KanbanSwingModule.tareaUC.addPropertyChangeListener(this);
+    }
+
 }
