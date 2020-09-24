@@ -12,17 +12,21 @@ import javax.persistence.EntityManager;
 
 public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implements TareaRepo {
 
-    private final String Tarea_findByColumnaProyecto = "SELECT t FROM Tarea t WHERE t.colProyFk = :colProyFk";
+    private final String Tarea_findByColumnaProyecto = "SELECT t FROM Tarea t WHERE t.proyectoFk = :proyectoFk AND t.columnaFk = :columnaFk";
 
     public TareaRepoImpl() {
         super(ResourcesKanban.EMF, TareaDomain.class, Tarea.class);
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectoDomain col) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(ProyectoDomain proy, ColumnaDomain col) {
         EntityManager em = getEntityManager();
+
         try {
-            List<Tarea> list = em.createQuery(Tarea_findByColumnaProyecto, Tarea.class).setParameter("colProyFk", ConverterService.convert(col, ColumnaProyecto.class)).getResultList();
+            List<Tarea> list = em.createQuery(Tarea_findByColumnaProyecto, Tarea.class)
+                    .setParameter("proyectoFk", ConverterService.convert(proy, Proyecto.class))
+                    .setParameter("columnaFk", ConverterService.convert(col, Columna.class))
+                    .getResultList();
             return ConverterService.convert(list, TareaDomain.class);
         } catch (Exception e) {
             return new ArrayList<>();

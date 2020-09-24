@@ -26,20 +26,28 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
     @Size(max = 10, message = "#msg.module.admin.validation.tarea_codigo_largo#")
     private String codigoTarea;
 
-    @NotNull(message = "#msg.module.admin.validation.tarea_columna_proy_null#")
-    private ColumnaProyectoDomain colProyFk;
-
     @NotNull(message = "#msg.module.admin.validation.tarea_prioridad_null#")
     private PrioridadDomain prioridadFk;
+
+    private int puntos;
+
+    private String descripcion;
+
+    private ColumnaDomain columnaFk;
+
+    private ProyectoDomain proyectoFk;
 
     public TareaDomain() {
     }
 
-    public TareaDomain(String nombreTarea, String codigoTarea, ColumnaProyectoDomain colProyFk, PrioridadDomain prioridadFk) {
+    public TareaDomain(String nombreTarea, String codigoTarea, PrioridadDomain prioridadFk, int puntos, String descripcion, ColumnaDomain columnaFk, ProyectoDomain proyectoFk) {
         this.nombreTarea = nombreTarea;
         this.codigoTarea = codigoTarea;
-        this.colProyFk = colProyFk;
         this.prioridadFk = prioridadFk;
+        this.puntos = puntos;
+        this.descripcion = descripcion;
+        this.columnaFk = columnaFk;
+        this.proyectoFk = proyectoFk;
     }
 
     public Integer getIdTarea() {
@@ -66,20 +74,44 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
         this.codigoTarea = codigoTarea;
     }
 
-    public ColumnaProyectoDomain getColProyFk() {
-        return colProyFk;
-    }
-
-    public void setColProyFk(ColumnaProyectoDomain colProyFk) {
-        this.colProyFk = colProyFk;
-    }
-
     public PrioridadDomain getPrioridadFk() {
         return prioridadFk;
     }
 
     public void setPrioridadFk(PrioridadDomain prioridadFk) {
         this.prioridadFk = prioridadFk;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public ColumnaDomain getColumnaFk() {
+        return columnaFk;
+    }
+
+    public void setColumnaFk(ColumnaDomain columnaFk) {
+        this.columnaFk = columnaFk;
+    }
+
+    public ProyectoDomain getProyectoFk() {
+        return proyectoFk;
+    }
+
+    public void setProyectoFk(ProyectoDomain proyectoFk) {
+        this.proyectoFk = proyectoFk;
     }
 
     @Override
@@ -111,7 +143,7 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
     public int compareTo(TareaDomain o) {
         int prior = this.prioridadFk.compareTo(o.prioridadFk);
         if (prior == 0) {
-            return codigoTarea.compareToIgnoreCase(o.codigoTarea);
+            return Integer.compare(puntos, o.puntos);
         }
         return prior;
     }

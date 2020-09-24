@@ -14,7 +14,6 @@ public class KanbanRepoInjectionConfig extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(ColumnaProyectoRepo.class).to(ColumnaProyectoRepoImpl.class).in(Singleton.class);
         bind(ColumnaRepo.class).to(ColumnaRepoImpl.class).in(Singleton.class);
         bind(PrioridadRepo.class).to(PrioridadRepoImpl.class).in(Singleton.class);
         bind(ProyectoRepo.class).to(ProyectoRepoImpl.class).in(Singleton.class);

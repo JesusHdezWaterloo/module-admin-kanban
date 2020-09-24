@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TareaUseCase extends CRUDUseCase<TareaDomain> {
 
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectoDomain col) throws Exception;
+    public List<TareaDomain> findByColumnaProyecto(ProyectoDomain proy, ColumnaDomain col) throws Exception;
 }

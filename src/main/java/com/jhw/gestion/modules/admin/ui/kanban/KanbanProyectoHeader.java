@@ -42,16 +42,8 @@ public class KanbanProyectoHeader extends _MaterialPanelComponent {
     }
 
     private void initComponents() {
-        buttonAddColumn = MaterialPreparedButtonsFactory.buildAddEdit();
-        buttonAddColumn.isCreated(true);
-        buttonAddColumn.setText("Columna");
     }
 
-    private MaterialButtonAddEdit buttonAddColumn;
-
     private void addListeners() {
-        buttonAddColumn.addActionListener((ActionEvent e) -> {
-            DialogModelInput.from(ColumnaProyectoInputView.from(proyecto));
-        });
     }
 }
