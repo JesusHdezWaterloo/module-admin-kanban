@@ -5,11 +5,8 @@ import com.jhw.gestion.modules.admin.ui.columna.ColumnaICBS;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.gestion.modules.admin.ui.prioridad.PrioridadICBSPopup;
 import com.jhw.gestion.modules.admin.ui.proyecto.ProyectoICBS;
-import com.jhw.swing.material.components.container.layout.HorizontalLayoutComponent;
-import com.jhw.swing.material.components.container.layout.HorizontalLayoutContainer;
-import com.jhw.swing.material.components.container.layout.VerticalLayoutContainer;
+import com.jhw.swing.material.components.container.layout.*;
 import com.jhw.swing.material.components.textarea.MaterialTextArea;
-import com.jhw.swing.material.components.textfield.MaterialTextFactory;
 import com.jhw.swing.material.components.textfield.*;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanCRUDInputView;
@@ -66,6 +63,8 @@ public class TareaInputView extends CleanCRUDInputView<TareaDomain> {
         hlc.add(HorizontalLayoutComponent.builder(textFieldPuntos).gapLeft(5).build());
 
         prioridadICBS = new PrioridadICBSPopup();
+        columnaICBS = new ColumnaICBS();
+        proyectoICBS = new ProyectoICBS();
         //textAreaDescripcion = MaterialPreparedTextAreaFactory.buildDescripcion();
 
         textAreaDescripcion = MaterialPreparedTextAreaFactory.buildDescripcion();

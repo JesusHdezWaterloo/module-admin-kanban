@@ -5,6 +5,7 @@
  */
 package com.jhw.gestion.modules.admin.core.domain;
 
+import com.jhw.gestion.modules.admin.core.utils.FibonacciNumber;
 import com.jhw.utils.clean.EntityDomainObjectValidated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,12 +30,16 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
     @NotNull(message = "#msg.module.admin.validation.tarea_prioridad_null#")
     private PrioridadDomain prioridadFk;
 
+    @FibonacciNumber(message = "#msg.module.admin.validation.tarea_puntos_no_fibo#")
     private int puntos;
 
+    @Size(max = 495, message = "#msg.module.contabilidad.validation.descripcion_larga#")
     private String descripcion;
 
+    @NotNull(message = "#msg.module.admin.validation.tarea_columna_null#")
     private ColumnaDomain columnaFk;
 
+    @NotNull(message = "#msg.module.admin.validation.tarea_proyecto_null#")
     private ProyectoDomain proyectoFk;
 
     public TareaDomain() {
