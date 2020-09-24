@@ -80,5 +80,6 @@ public class KanbanProyecto extends _PanelGradient implements Update, PropertyCh
 
     private void addPropertyListeners() {
         KanbanSwingModule.tareaUC.addPropertyChangeListener(this);
+        KanbanSwingModule.columnaUC.addPropertyChangeListener(this);
     }
 }

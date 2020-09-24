@@ -17,8 +17,8 @@ public class FibonacciNumberUtils {
 
     public static boolean isFibo(int value) {
         return useFixed
-                ? Arrays.binarySearch(generateFibboFixed(), value) < 0
-                : Arrays.binarySearch(generateFibboNumbers(30), value) < 0;
+                ? Arrays.binarySearch(generateFibboFixed(), value) >= 0
+                : Arrays.binarySearch(generateFibboNumbers(30), value) >= 0;
     }
 
     public static int[] generateFibboFixed() {

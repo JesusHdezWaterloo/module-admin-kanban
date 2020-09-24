@@ -95,7 +95,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private void addListeners() {
         header.addActionListenerButtonAdd((ActionEvent e) -> {
-            //new DialogModelInput(this, TareaInputView.fromColumna(colProy));
+            DialogModelInput.from(TareaInputView.fromColumna(colProy));
         });
     }
 
@@ -104,6 +104,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         public static KanbanColumnHeader from(ColumnaProyectVolatile colProy) {
             KanbanColumnHeader columnHeader = MaterialSwingInjector.getImplementation(KanbanColumnHeader.class);
             columnHeader.setHeader(colProy.getColumna().getNombreColumna());
+            columnHeader.setToolTipText(colProy.getColumna().getDescripcion());
             return columnHeader;
         }
 
@@ -121,6 +122,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
             this.add(labelHeader);
 
             buttonAdd = MaterialPreparedButtonsFactory.buildAddEdit();
+            buttonAdd.setToolTipText("Agregar tarea en esta columna");
             buttonAdd.isCreated(true);
             buttonAdd.setText("");
             int w = (int) (2f * buttonAdd.getIcon().getIconWidth());
