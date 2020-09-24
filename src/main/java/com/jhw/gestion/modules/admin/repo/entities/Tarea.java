@@ -66,7 +66,7 @@ public class Tarea implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(max = 500)
+    @Size(max = 1000)
     @Column(name = "descripcion", nullable = false, length = 500)
     private String descripcion;
 
