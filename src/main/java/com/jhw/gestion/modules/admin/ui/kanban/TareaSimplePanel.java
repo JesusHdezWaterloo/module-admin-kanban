@@ -48,21 +48,32 @@ public class TareaSimplePanel extends _MaterialPanelComponent implements Update 
 
         this.setLayout(new BorderLayout());
 
-        labelNombre = MaterialLabelsFactory.build();
-        labelNombre.setFont(MaterialFontRoboto.BOLD.deriveFont(18f));
-        labelNombre.setHorizontalAlignment(SwingConstants.CENTER);
-
+        //----------------UP-----------------------
         labelCodigo = MaterialLabelsFactory.build();
         labelCodigo.setFont(MaterialFontRoboto.MEDIUM.deriveFont(20f));
         labelCodigo.setHorizontalAlignment(SwingConstants.CENTER);
 
+        labelPuntos = MaterialLabelsFactory.build();
+        labelPuntos.setFont(MaterialFontRoboto.MEDIUM.deriveFont(16f));
+        labelPuntos.setHorizontalAlignment(SwingConstants.CENTER);
+
         JPanel up = MaterialContainersFactory.buildPanelTransparent();
-        up.setBorder(new EmptyBorder(5, 10, 0, 0));
+        up.setBorder(new EmptyBorder(5, 10, 0, 5));
         up.setLayout(new BorderLayout());
         up.add(labelCodigo, BorderLayout.WEST);
-        up.add(labelNombre);
+        up.add(labelPuntos, BorderLayout.EAST);
         this.add(up, BorderLayout.NORTH);
 
+        //----------------MIDDLE-----------------------
+        JPanel middle = MaterialContainersFactory.buildPanelTransparent();
+        middle.setLayout(new BorderLayout());
+        labelNombre = MaterialLabelsFactory.build();
+        labelNombre.setFont(MaterialFontRoboto.BOLD.deriveFont(18f));
+        labelNombre.setHorizontalAlignment(SwingConstants.CENTER);
+        middle.add(labelNombre);
+        this.add(middle);
+
+        //----------------DOWN-----------------------
         buttonEdit = MaterialButtonsFactory.buildIconTransparent();
         buttonEdit.setRippleColor(PersonalizationHandler.getColor(Personalization.KEY_COLOR_BUTTON_EDIT));
         buttonEdit.setIcon(PersonalizationHandler.getDerivableIcon(Personalization.KEY_ICON_BUTTON_EDIT));
@@ -78,14 +89,24 @@ public class TareaSimplePanel extends _MaterialPanelComponent implements Update 
     }
 
     private MaterialLabel labelCodigo;
+    private MaterialLabel labelPuntos;
     private MaterialLabel labelNombre;
     private MaterialButtonIcon buttonEdit;
     private PrioridadSimplePanel panelPrioridad;
 
     @Override
     public void update() {
+        this.setToolTipText(tarea.getDescripcion());
+        
         labelCodigo.setObject(tarea.getCodigoTarea());
+        labelCodigo.setToolTipText("Código de la tarea: " + labelCodigo.getObject());
+
         labelNombre.setObject(tarea.getNombreTarea());
+        labelNombre.setToolTipText("Nombre de la tarea: " + labelNombre.getObject());
+
+        labelPuntos.setObject(String.valueOf(tarea.getPuntos()) + " pts.");
+        labelPuntos.setToolTipText("Puntos de la tarea: " + labelPuntos.getObject());
+
         panelPrioridad.setObject(tarea.getPrioridadFk());//internamente actualiza
     }
 
