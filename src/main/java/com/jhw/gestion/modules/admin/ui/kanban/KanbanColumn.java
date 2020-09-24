@@ -15,6 +15,8 @@ import com.jhw.swing.material.components.container.panel.*;
 import com.jhw.swing.material.components.labels.*;
 import com.jhw.swing.material.components.scrollpane.MaterialScrollFactory;
 import com.jhw.swing.material.components.scrollpane.MaterialScrollPane;
+import com.jhw.swing.material.components.searchfield.MaterialSearchField;
+import com.jhw.swing.material.components.searchfield._MaterialSearchField;
 import com.jhw.swing.material.injection.MaterialSwingInjector;
 import com.jhw.swing.material.standards.MaterialColors;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
@@ -26,6 +28,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -40,10 +44,13 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
     public static KanbanColumn from(ColumnaProyectVolatile colProy) {
         return new KanbanColumn(colProy);
     }
+
     private final ColumnaProyectVolatile colProy;
+    private List<TareaDomain> tareas = new ArrayList<>();
 
     public KanbanColumn(ColumnaProyectVolatile colProy) {
         this.colProy = colProy;
+
         initComponents();
         addListeners();
         update();
@@ -75,6 +82,10 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     @Override
     public void update() {
+        try {
+            this.tareas = KanbanSwingModule.tareaUC.findByColumnaProyecto(colProy);
+        } catch (Exception e) {
+        }
         updateColumn();
     }
 
@@ -83,8 +94,10 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
             panelTareas.removeAll();
             VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder((int) panelTareas.getPreferredSize().getWidth());
 
-            for (TareaDomain tarea : KanbanSwingModule.tareaUC.findByColumnaProyecto(colProy)) {
-                vlcTareas.add(TareaSimplePanel.from(tarea));
+            for (TareaDomain tarea : tareas) {
+                if (tarea.test(header.getSearchText())) {
+                    vlcTareas.add(TareaSimplePanel.from(tarea));
+                }
             }
 
             panelTareas.add(vlcTareas.build());
@@ -97,9 +110,12 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         header.addActionListenerButtonAdd((ActionEvent e) -> {
             DialogModelInput.from(TareaInputView.fromColumna(colProy));
         });
+        header.setSearchActionListener((ActionEvent e) -> {
+            updateColumn();
+        });
     }
 
-    private static class KanbanColumnHeader extends _MaterialPanelComponent {
+    private static class KanbanColumnHeader extends _PanelTransparent {
 
         public static KanbanColumnHeader from(ColumnaProyectVolatile colProy) {
             KanbanColumnHeader columnHeader = MaterialSwingInjector.getImplementation(KanbanColumnHeader.class);
@@ -113,13 +129,16 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         }
 
         private void initComponents() {
-            this.setGap(0);
-            this.setBackground(MaterialColors.GREY_300);
+            _MaterialPanelComponent back = (_MaterialPanelComponent) MaterialContainersFactory.buildPanelComponent();
+            back.setBackground(MaterialColors.GREY_300);
+            back.setGap(0);
+            back.setLayout(new BorderLayout());
+            searchField = _MaterialSearchField.from();
 
             labelHeader = MaterialLabelsFactory.build();
             labelHeader.setHorizontalAlignment(SwingConstants.CENTER);
             labelHeader.setFont(labelHeader.getFont().deriveFont(Font.BOLD));
-            this.add(labelHeader);
+            back.add(labelHeader);
 
             buttonAdd = MaterialPreparedButtonsFactory.buildAddEdit();
             buttonAdd.setToolTipText("Agregar tarea en esta columna");
@@ -127,11 +146,16 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
             buttonAdd.setText("");
             int w = (int) (2f * buttonAdd.getIcon().getIconWidth());
             buttonAdd.setPreferredSize(new Dimension(w, w - 5));//el menos para emparejar el tamaño por el border
-            this.add(buttonAdd, BorderLayout.EAST);
+            back.add(buttonAdd, BorderLayout.EAST);
+
+            this.add(back, BorderLayout.NORTH);
+
+            this.add(searchField);
         }
 
         private MaterialLabel labelHeader;
         private MaterialButtonAddEdit buttonAdd;
+        private MaterialSearchField searchField;
 
         public void setHeader(String text) {
             labelHeader.setObject(text.toUpperCase());
@@ -139,6 +163,14 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
         public void addActionListenerButtonAdd(ActionListener listener) {
             buttonAdd.addActionListener(listener);
+        }
+
+        public String getSearchText() {
+            return searchField.getSearchField().getText();
+        }
+
+        public void setSearchActionListener(ActionListener searchAction) {
+            searchField.setSearchActionListener(searchAction);
         }
     }
 }
