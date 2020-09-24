@@ -21,7 +21,6 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
 
     private final KanbanModuleNavigator navigator = new KanbanModuleNavigator();
 
-    public final static ColumnaProyectoUseCase columnaProyectoUC;
     public final static ColumnaUseCase columnaUC;
     public final static PrioridadUseCase prioridadUC;
     public final static ProyectoUseCase proyectoUC;
@@ -30,7 +29,6 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
     static {
         KanbanCoreModule.init(KanbanRepoModule.init());
 
-        columnaProyectoUC = KanbanCoreModule.getInstance().getImplementation(ColumnaProyectoUseCase.class);
         columnaUC = KanbanCoreModule.getInstance().getImplementation(ColumnaUseCase.class);
         prioridadUC = KanbanCoreModule.getInstance().getImplementation(PrioridadUseCase.class);
         proyectoUC = KanbanCoreModule.getInstance().getImplementation(ProyectoUseCase.class);

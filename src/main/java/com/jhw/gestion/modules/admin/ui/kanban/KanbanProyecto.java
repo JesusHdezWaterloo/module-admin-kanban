@@ -6,7 +6,8 @@
 package com.jhw.gestion.modules.admin.ui.kanban;
 
 import com.clean.core.app.services.ExceptionHandler;
-import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectoDomain;
+import com.jhw.gestion.modules.admin.core.domain.ColumnaDomain;
+import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectVolatile;
 import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
@@ -44,14 +45,14 @@ public class KanbanProyecto extends _PanelGradient implements Update, PropertyCh
             this.removeAll();//quito todo
 
             //busco las columnas
-            List<ColumnaProyectoDomain> columnas = KanbanSwingModule.columnaProyectoUC.findByProyecto(proyecto);
+            List<ColumnaDomain> columnas = KanbanSwingModule.columnaUC.findAll();
 
             //pongo el layout en dependencia de las columnas
             this.setLayout(new GridLayout(1, columnas.size()));
 
             //relleno las columnas
-            for (ColumnaProyectoDomain c : columnas) {
-                this.add(KanbanColumn.from(c));
+            for (ColumnaDomain c : columnas) {
+                this.add(KanbanColumn.from(new ColumnaProyectVolatile(proyecto, c)));
             }
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
@@ -79,6 +80,5 @@ public class KanbanProyecto extends _PanelGradient implements Update, PropertyCh
 
     private void addPropertyListeners() {
         KanbanSwingModule.tareaUC.addPropertyChangeListener(this);
-        KanbanSwingModule.columnaProyectoUC.addPropertyChangeListener(this);
     }
 }

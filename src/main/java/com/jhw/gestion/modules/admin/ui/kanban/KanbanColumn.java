@@ -37,14 +37,13 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private final static int DEFAULT_GAP = 0;
 
-    public static KanbanColumn from(ColumnaProyectoDomain columna) {
-        return new KanbanColumn(columna);
+    public static KanbanColumn from(ColumnaProyectVolatile colProy) {
+        return new KanbanColumn(colProy);
     }
+    private final ColumnaProyectVolatile colProy;
 
-    private final ColumnaProyectoDomain columna;
-
-    public KanbanColumn(ColumnaProyectoDomain columna) {
-        this.columna = columna;
+    public KanbanColumn(ColumnaProyectVolatile colProy) {
+        this.colProy = colProy;
         initComponents();
         addListeners();
         update();
@@ -53,7 +52,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
     private void initComponents() {
         this.setGap(DEFAULT_GAP);//gap para respetar el sombreado
 
-        header = KanbanColumnHeader.from(columna);
+        header = KanbanColumnHeader.from(colProy);
         this.add(header, BorderLayout.NORTH);
 
         panelTareas = MaterialContainersFactory.buildPanelTransparent();
@@ -70,7 +69,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         //this.add(panelTareas);
         //----------------sin scroll----------------
     }
-    
+
     private KanbanColumnHeader header;
     private JPanel panelTareas;
 
@@ -84,7 +83,7 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
             panelTareas.removeAll();
             VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder((int) panelTareas.getPreferredSize().getWidth());
 
-            for (TareaDomain tarea : KanbanSwingModule.tareaUC.findByColumnaProyecto(columna)) {
+            for (TareaDomain tarea : KanbanSwingModule.tareaUC.findByColumnaProyecto(colProy)) {
                 vlcTareas.add(TareaSimplePanel.from(tarea));
             }
 
@@ -96,15 +95,15 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private void addListeners() {
         header.addActionListenerButtonAdd((ActionEvent e) -> {
-            new DialogModelInput(this, TareaInputView.fromColumna(columna));
+            //new DialogModelInput(this, TareaInputView.fromColumna(colProy));
         });
     }
 
     private static class KanbanColumnHeader extends _MaterialPanelComponent {
 
-        public static KanbanColumnHeader from(ColumnaProyectoDomain col) {
+        public static KanbanColumnHeader from(ColumnaProyectVolatile colProy) {
             KanbanColumnHeader columnHeader = MaterialSwingInjector.getImplementation(KanbanColumnHeader.class);
-            columnHeader.setHeader(col.getColumnaFk().getNombreColumna());
+            columnHeader.setHeader(colProy.getColumna().getNombreColumna());
             return columnHeader;
         }
 
