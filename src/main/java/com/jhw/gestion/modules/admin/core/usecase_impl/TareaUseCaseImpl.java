@@ -16,7 +16,7 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ProyectoDomain proy, ColumnaDomain col) throws Exception {
-        return repo.findByColumnaProyecto(proy, col);
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
+        return repo.findByColumnaProyecto(colProy);
     }
 }

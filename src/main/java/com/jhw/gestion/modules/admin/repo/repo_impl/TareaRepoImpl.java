@@ -19,13 +19,13 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ProyectoDomain proy, ColumnaDomain col) {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) {
         EntityManager em = getEntityManager();
 
         try {
             List<Tarea> list = em.createQuery(Tarea_findByColumnaProyecto, Tarea.class)
-                    .setParameter("proyectoFk", ConverterService.convert(proy, Proyecto.class))
-                    .setParameter("columnaFk", ConverterService.convert(col, Columna.class))
+                    .setParameter("proyectoFk", ConverterService.convert(colProy.getProyecto(), Proyecto.class))
+                    .setParameter("columnaFk", ConverterService.convert(colProy.getColumna(), Columna.class))
                     .getResultList();
             return ConverterService.convert(list, TareaDomain.class);
         } catch (Exception e) {

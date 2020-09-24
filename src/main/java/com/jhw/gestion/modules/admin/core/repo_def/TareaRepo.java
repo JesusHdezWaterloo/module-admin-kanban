@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface TareaRepo extends CRUDRepository<TareaDomain> {
 
-    public List<TareaDomain> findByColumnaProyecto(ProyectoDomain proy, ColumnaDomain col);
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy);
 
 }
