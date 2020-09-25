@@ -1,14 +1,25 @@
 package com.jhw.gestion.modules.admin.ui.module;
 
 import com.clean.core.app.services.NavigationService;
+import com.clean.swing.utils.DashBoardComponent;
+import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
+import com.jhw.gestion.modules.admin.ui.columna.ColumnaDetailView;
+import com.jhw.gestion.modules.admin.ui.kanban.KanbanProyecto;
+import com.jhw.gestion.modules.admin.ui.prioridad.PrioridadDetailMainPanel;
+import com.jhw.gestion.modules.admin.ui.proyecto.ProyectoDetailView;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.utils.icons.DerivableIcon;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
 public class KanbanModuleNavigator implements NavigationService {
+
+    //test mientras tanto
+    public static final DerivableIcon ICON_KANBAN_PROJECT = MaterialIcons.TEC_NB;
 
     public static final String GROUP = "modulos.kanaban";
 
@@ -35,4 +46,37 @@ public class KanbanModuleNavigator implements NavigationService {
         }
     }
 
+    public List<DashBoardComponent> createComponents() {
+        List<DashBoardComponent> list = new ArrayList<>();
+        try {
+            for (ProyectoDomain proyectoDomain : KanbanSwingModule.proyectoUC.findAll()) {
+                list.add(DashBoardComponent.from(
+                        proyectoDomain.getNombreProyecto(),
+                        ICON_KANBAN_PROJECT,
+                        KanbanModuleNavigator.GROUP + "." + proyectoDomain.getNombreProyecto(),
+                        KanbanProyecto.from(proyectoDomain)));
+            }
+
+            list.add(DashBoardComponent.from(
+                    KanbanModuleNavigator.PROYECTO,
+                    KanbanModuleNavigator.ICON_PROYECTO,
+                    KanbanModuleNavigator.NAV_PROYECTO,
+                    new ProyectoDetailView()));
+
+            list.add(DashBoardComponent.from(
+                    KanbanModuleNavigator.COLUMNA,
+                    KanbanModuleNavigator.ICON_COLUMNA,
+                    KanbanModuleNavigator.NAV_COLUMNA,
+                    new ColumnaDetailView()));
+
+            list.add(DashBoardComponent.from(
+                    KanbanModuleNavigator.PRIORIDAD,
+                    KanbanModuleNavigator.ICON_PRIORIDAD,
+                    KanbanModuleNavigator.NAV_PRIORIDAD,
+                    new PrioridadDetailMainPanel()));
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
 }
