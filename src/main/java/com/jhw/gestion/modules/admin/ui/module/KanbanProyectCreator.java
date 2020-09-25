@@ -31,7 +31,7 @@ public class KanbanProyectCreator {
                 list.add(new KanbanProyectCreator(
                         proyectoDomain.getNombreProyecto(),
                         ICON_KANBAN,
-                        SHA.hash256(proyectoDomain.getNombreProyecto()),
+                        KanbanModuleNavigator.GROUP + "." + proyectoDomain.getNombreProyecto(),
                         KanbanProyecto.from(proyectoDomain)));
             }
         } catch (Exception e) {

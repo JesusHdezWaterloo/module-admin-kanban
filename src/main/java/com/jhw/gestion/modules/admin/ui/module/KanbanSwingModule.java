@@ -14,10 +14,17 @@ import com.jhw.gestion.modules.admin.ui.prioridad.PrioridadDetailMainPanel;
 import com.jhw.gestion.modules.admin.ui.proyecto.ProyectoDetailView;
 import com.jhw.mysql.services.MySQLHandler;
 import com.jhw.swing.material.components.taskpane.CollapseMenu;
+import com.jhw.swing.models.utils.UpdateListener;
+import com.jhw.utils.interfaces.Update;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
-public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
+public class KanbanSwingModule extends DefaultAbstractSwingMainModule implements Update {
+
+    private final UpdateListener updList;
+    private final CollapseMenu menu = new CollapseMenu(KanbanModuleNavigator.ICON_KANBAN, KanbanModuleNavigator.KANBAN);
+    private DashBoardSimple dash;
+    private AbstractSwingApplication app;
 
     private final KanbanModuleNavigator navigator = new KanbanModuleNavigator();
 
@@ -34,14 +41,18 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
         proyectoUC = KanbanCoreModule.getInstance().getImplementation(ProyectoUseCase.class);
         tareaUC = KanbanCoreModule.getInstance().getImplementation(TareaUseCase.class);
 
+
         ResourceServiceImplementation.init();
     }
 
     private KanbanSwingModule() {
+        updList = new UpdateListener(this);
+        KanbanSwingModule.proyectoUC.addPropertyChangeListener(updList);
     }
 
     public static KanbanSwingModule init() {
         System.out.println("Iniciando 'Kanban'");
+
         return new KanbanSwingModule();
     }
 
@@ -51,10 +62,28 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
     }
 
     private void registerMainElements(AbstractSwingApplication app) {
-        DashBoardSimple dash = app.rootView().dashboard();
-        CollapseMenu menu = new CollapseMenu(KanbanModuleNavigator.ICON_KANBAN, KanbanModuleNavigator.KANBAN);
-        dash.addKeyValue(DashboardConstants.MAIN_ELEMENT, menu);
+        this.app = app;
+        this.dash = app.rootView().dashboard();
+        this.dash.addKeyValue(DashboardConstants.MAIN_ELEMENT, menu);
+        update();
+    }
 
+    @Override
+    public void navigateTo(String string, Object... o) {
+        navigator.navigateTo(string, o);
+    }
+
+    @Override
+    public void closeModule() {
+        MySQLHandler.save(ResourcesKanban.SCHEMA);
+    }
+
+    @Override
+    public void update() {
+        menu.clear();//limpia el menu
+        dash.removeGroupView(KanbanModuleNavigator.GROUP);//limpia las vistas
+        
+        //agrega todo lo demas
         for (KanbanProyectCreator c : KanbanProyectCreator.createKanbansProjects()) {
             dash.addView(c.nav, c.view);
             menu.addMenuItem(new AbstractAction(c.name, c.icon) {
@@ -88,42 +117,7 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule {
                 app.navigateTo(KanbanModuleNavigator.NAV_PRIORIDAD);
             }
         });
-        /*
-        
-
-        dash.addView(KanbanModuleNavigator.NAV_EMPLEADOS, new EmpleadoMainPanel());
-        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.EMPLEADOS, KanbanModuleNavigator.ICON_EMPLEADOS) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                app.navigateTo(KanbanModuleNavigator.NAV_EMPLEADOS);
-            }
-        });
-
-        dash.addView(KanbanModuleNavigator.NAV_SALARIOS, new PagoSalarioDetailView());
-        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.SALARIOS, KanbanModuleNavigator.ICON_SALARIOS) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                app.navigateTo(KanbanModuleNavigator.NAV_SALARIOS);
-            }
-        });
-
-        dash.addView(KanbanModuleNavigator.NAV_TIPOS_SALARIOS, new TipoSalarioDetailView());
-        menu.addMenuItem(new AbstractAction(KanbanModuleNavigator.TIPOS_SALARIOS, KanbanModuleNavigator.ICON_TIPO_SALARIO) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                app.navigateTo(KanbanModuleNavigator.NAV_TIPOS_SALARIOS);
-            }
-        });
-         */
-    }
-
-    @Override
-    public void navigateTo(String string, Object... o) {
-        navigator.navigateTo(string, o);
-    }
-
-    @Override
-    public void closeModule() {
-        MySQLHandler.save(ResourcesKanban.SCHEMA);
+        //repinta el dashboard
+        dash.format();
     }
 }
