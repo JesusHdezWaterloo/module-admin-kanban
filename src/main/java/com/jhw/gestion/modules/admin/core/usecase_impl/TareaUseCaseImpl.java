@@ -15,9 +15,8 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
         super.setRepo(repo);
     }
 
-
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectoDomain col) throws Exception {
-        return repo.findByColumnaProyecto(col);
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
+        return repo.findByColumnaProyecto(colProy);
     }
 }

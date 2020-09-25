@@ -30,4 +30,8 @@ public class ProyectoICBS extends InputComboBoxSelection<ProyectoDomain> {
         return ProyectoInputView.from();
     }
 
+    @Override
+    protected void addPropertyChange() {
+        KanbanSwingModule.proyectoUC.addPropertyChangeListener(this);
+    }
 }

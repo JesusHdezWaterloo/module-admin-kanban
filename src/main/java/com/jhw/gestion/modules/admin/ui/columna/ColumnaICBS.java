@@ -31,4 +31,8 @@ public class ColumnaICBS extends InputComboBoxSelection<ColumnaDomain> {
         return ColumnaInputView.from();
     }
 
+    @Override
+    protected void addPropertyChange() {
+        KanbanSwingModule.columnaUC.addPropertyChangeListener(this);
+    }
 }

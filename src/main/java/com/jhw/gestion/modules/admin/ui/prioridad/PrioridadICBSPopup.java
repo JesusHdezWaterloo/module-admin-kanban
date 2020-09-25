@@ -56,4 +56,9 @@ public class PrioridadICBSPopup extends InputPopupSelection<PrioridadDomain> {
         getComponent().setText(TEXT + " (" + cargo + ")");
         getComponent().getButton().setBackground(new Color(cargo.getColor()));
     }
+
+    @Override
+    protected void addPropertyChange() {
+        KanbanSwingModule.prioridadUC.addPropertyChangeListener(this);
+    }
 }

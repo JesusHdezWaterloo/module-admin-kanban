@@ -16,15 +16,4 @@ public class ColumnaUseCaseImpl extends DefaultCRUDUseCase<ColumnaDomain> implem
         super.setRepo(repo);
     }
 
-    //no se usa
-    @Override
-    public List<ColumnaDomain> findByProyecto(ProyectoDomain proyecto) throws Exception{
-        List<ColumnaProyectoDomain> rel = KanbanCoreModule.getInstance().getImplementation(ColumnaProyectoUseCase.class).findByProyecto(proyecto);
-        List<ColumnaDomain> l = new ArrayList<>(rel.size());
-        for (ColumnaProyectoDomain colProyDomain : rel) {
-            l.add(colProyDomain.getColumnaFk());
-        }
-        return l;
-    }
-
 }

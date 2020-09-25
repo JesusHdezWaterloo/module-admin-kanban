@@ -14,7 +14,6 @@ public class KanbanCoreInjectionConfig extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(ColumnaProyectoUseCase.class).to(ColumnaProyectoUseCaseImpl.class).in(Singleton.class);
         bind(ColumnaUseCase.class).to(ColumnaUseCaseImpl.class).in(Singleton.class);
         bind(PrioridadUseCase.class).to(PrioridadUseCaseImpl.class).in(Singleton.class);
         bind(ProyectoUseCase.class).to(ProyectoUseCaseImpl.class).in(Singleton.class);

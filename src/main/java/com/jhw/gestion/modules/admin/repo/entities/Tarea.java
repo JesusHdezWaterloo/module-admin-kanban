@@ -35,36 +35,52 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tarea.findAll", query = "SELECT t FROM Tarea t"),
     @NamedQuery(name = "Tarea.findByIdTarea", query = "SELECT t FROM Tarea t WHERE t.idTarea = :idTarea"),
     @NamedQuery(name = "Tarea.findByNombreTarea", query = "SELECT t FROM Tarea t WHERE t.nombreTarea = :nombreTarea"),
-    @NamedQuery(name = "Tarea.findByCodigoTarea", query = "SELECT t FROM Tarea t WHERE t.codigoTarea = :codigoTarea")})
+    @NamedQuery(name = "Tarea.findByCodigoTarea", query = "SELECT t FROM Tarea t WHERE t.codigoTarea = :codigoTarea"),
+    @NamedQuery(name = "Tarea.findByPuntos", query = "SELECT t FROM Tarea t WHERE t.puntos = :puntos"),
+    @NamedQuery(name = "Tarea.findByDescripcion", query = "SELECT t FROM Tarea t WHERE t.descripcion = :descripcion")})
 public class Tarea implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_tarea", nullable = false)
     private Integer idTarea;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "nombre_tarea", nullable = false, length = 100)
     private String nombreTarea;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "codigo_tarea", nullable = false, length = 10)
+    private String codigoTarea;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "puntos", nullable = false)
+    private int puntos;
     
     @Basic(optional = false)
     @NotNull
-    @Size(max = 10)
-    @Column(name = "codigo_tarea", nullable = false, length = 10)
-    private String codigoTarea;
-    
-    @JoinColumn(name = "col_proy_fk", referencedColumnName = "id_columna_proyecto", nullable = false)
-    @ManyToOne(optional = false)
-    private ColumnaProyecto colProyFk;
-    
+    @Size(max = 1000)
+    @Column(name = "descripcion", nullable = false, length = 500)
+    private String descripcion;
+
     @JoinColumn(name = "prioridad_fk", referencedColumnName = "id_prioridad", nullable = false)
     @ManyToOne(optional = false)
     private Prioridad prioridadFk;
+
+    @JoinColumn(name = "proyecto_fk", referencedColumnName = "id_proyecto", nullable = false)
+    @ManyToOne(optional = false)
+    private Proyecto proyectoFk;
+
+    @JoinColumn(name = "columna_fk", referencedColumnName = "id_columna", nullable = false)
+    @ManyToOne(optional = false)
+    private Columna columnaFk;
 
     public Tarea() {
     }
@@ -73,10 +89,12 @@ public class Tarea implements Serializable {
         this.idTarea = idTarea;
     }
 
-    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea) {
+    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea, int puntos, String descripcion) {
         this.idTarea = idTarea;
         this.nombreTarea = nombreTarea;
         this.codigoTarea = codigoTarea;
+        this.puntos = puntos;
+        this.descripcion = descripcion;
     }
 
     public Integer getIdTarea() {
@@ -103,12 +121,28 @@ public class Tarea implements Serializable {
         this.codigoTarea = codigoTarea;
     }
 
-    public ColumnaProyecto getColProyFk() {
-        return colProyFk;
+    public int getPuntos() {
+        return puntos;
     }
 
-    public void setColProyFk(ColumnaProyecto colProyFk) {
-        this.colProyFk = colProyFk;
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Columna getColumnaFk() {
+        return columnaFk;
+    }
+
+    public void setColumnaFk(Columna columnaFk) {
+        this.columnaFk = columnaFk;
     }
 
     public Prioridad getPrioridadFk() {
@@ -117,6 +151,14 @@ public class Tarea implements Serializable {
 
     public void setPrioridadFk(Prioridad prioridadFk) {
         this.prioridadFk = prioridadFk;
+    }
+
+    public Proyecto getProyectoFk() {
+        return proyectoFk;
+    }
+
+    public void setProyectoFk(Proyecto proyectoFk) {
+        this.proyectoFk = proyectoFk;
     }
 
     @Override
@@ -141,7 +183,7 @@ public class Tarea implements Serializable {
 
     @Override
     public String toString() {
-        return "com.jhw.gestion.modules.admin.repo.entities.Tarea[ idTarea=" + idTarea + " ]";
+        return "testJPA.entities.kanban.Tarea[ idTarea=" + idTarea + " ]";
     }
-    
+
 }

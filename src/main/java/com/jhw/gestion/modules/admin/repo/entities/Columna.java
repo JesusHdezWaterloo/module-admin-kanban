@@ -41,25 +41,30 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Columna implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_columna", nullable = false)
     private Integer idColumna;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "nombre_columna", nullable = false, length = 100)
     private String nombreColumna;
-    
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "posicion", nullable = false)
+    private int posicion;
+
     @Basic(optional = false)
     @NotNull
     @Size(max = 500)
     @Column(name = "descripcion", nullable = false, length = 500)
     private String descripcion;
-    
+
     public Columna() {
     }
 
@@ -67,10 +72,19 @@ public class Columna implements Serializable {
         this.idColumna = idColumna;
     }
 
-    public Columna(Integer idColumna, String nombreColumna, String descripcion) {
+    public Columna(Integer idColumna, String nombreColumna, int posicion, String descripcion) {
         this.idColumna = idColumna;
         this.nombreColumna = nombreColumna;
+        this.posicion = posicion;
         this.descripcion = descripcion;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 
     public Integer getIdColumna() {
@@ -121,5 +135,5 @@ public class Columna implements Serializable {
     public String toString() {
         return "com.jhw.gestion.modules.admin.repo.entities.Columna[ idColumna=" + idColumna + " ]";
     }
-    
+
 }
