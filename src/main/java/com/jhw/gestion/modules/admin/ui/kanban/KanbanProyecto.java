@@ -11,6 +11,7 @@ import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectVolatile;
 import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
+import com.jhw.swing.models.utils.UpdateListener;
 import com.jhw.utils.interfaces.Update;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
@@ -21,7 +22,9 @@ import java.util.List;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
-public class KanbanProyecto extends _PanelGradient implements Update, PropertyChangeListener {
+public class KanbanProyecto extends _PanelGradient implements Update {
+
+    private final UpdateListener updList = new UpdateListener(this);
 
     public static KanbanProyecto from(ProyectoDomain proyecto) {
         return new KanbanProyecto(proyecto);
@@ -59,27 +62,8 @@ public class KanbanProyecto extends _PanelGradient implements Update, PropertyCh
         }
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        super.propertyChange(evt);
-        switch (evt.getPropertyName()) {
-            case "create":
-                update();
-                break;
-            case "edit":
-                update();
-                break;
-            case "destroy":
-                update();
-                break;
-            case "destroyById":
-                update();
-                break;
-        }
-    }
-
     private void addPropertyListeners() {
-        KanbanSwingModule.tareaUC.addPropertyChangeListener(this);
-        KanbanSwingModule.columnaUC.addPropertyChangeListener(this);
+        KanbanSwingModule.tareaUC.addPropertyChangeListener(updList);
+        KanbanSwingModule.columnaUC.addPropertyChangeListener(updList);
     }
 }
