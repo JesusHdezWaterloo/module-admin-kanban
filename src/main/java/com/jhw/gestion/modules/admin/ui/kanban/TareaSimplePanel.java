@@ -11,10 +11,12 @@ import com.jhw.personalization.core.domain.Personalization;
 import com.jhw.personalization.services.PersonalizationHandler;
 import com.jhw.swing.material.components.button.MaterialButtonIcon;
 import com.jhw.swing.material.components.button.MaterialButtonsFactory;
+import com.jhw.swing.material.components.button._MaterialButton;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
+import com.jhw.swing.material.injection.MaterialSwingInjector;
 import com.jhw.swing.material.standards.MaterialFontRoboto;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
 import com.jhw.utils.interfaces.Update;
@@ -31,16 +33,18 @@ import javax.swing.border.EmptyBorder;
 public class TareaSimplePanel extends _MaterialPanelComponent implements Update {
 
     public static TareaSimplePanel from(TareaDomain tarea) {
-        return new TareaSimplePanel(tarea);
+        TareaSimplePanel tareaPanel = MaterialSwingInjector.getImplementation(TareaSimplePanel.class);
+        tareaPanel.tarea = tarea;
+        tareaPanel.update();
+        return tareaPanel;
     }
 
-    private final TareaDomain tarea;
+    private TareaDomain tarea;
 
-    public TareaSimplePanel(TareaDomain tarea) {
-        this.tarea = tarea;
+    @Deprecated
+    protected TareaSimplePanel() {
         initComponents();
         addListeners();
-        update();
     }
 
     private void initComponents() {
@@ -97,7 +101,7 @@ public class TareaSimplePanel extends _MaterialPanelComponent implements Update 
     @Override
     public void update() {
         this.setToolTipText(tarea.getDescripcion());
-        
+
         labelCodigo.setObject(tarea.getCodigoTarea());
         labelCodigo.setToolTipText("Código de la tarea: " + labelCodigo.getObject());
 
