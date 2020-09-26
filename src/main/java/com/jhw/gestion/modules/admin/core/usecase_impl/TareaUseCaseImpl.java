@@ -5,6 +5,7 @@ import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.core.repo_def.*;
 import com.jhw.gestion.modules.admin.core.usecase_def.*;
 import com.jhw.gestion.modules.admin.core.module.KanbanCoreModule;
+import java.util.Collections;
 import java.util.List;
 
 public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements TareaUseCase {
@@ -17,6 +18,8 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
 
     @Override
     public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
-        return repo.findByColumnaProyecto(colProy);
+        List<TareaDomain> l = repo.findByColumnaProyecto(colProy);
+        Collections.sort(l);
+        return l;
     }
 }
