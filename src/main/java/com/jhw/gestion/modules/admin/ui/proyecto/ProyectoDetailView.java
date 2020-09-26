@@ -6,13 +6,16 @@ import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.models.detail._MaterialPanelDetail;
 import com.jhw.swing.material.components.table.Column;
+import com.jhw.swing.models.clean.CleanDetailCRUDDragDrop;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
+import com.jhw.swing.models.input.panels.ModelPanel;
+import java.util.List;
 
 /**
  *
  * @author Jesús Hernández Barrios (jhernandezb96@gmail.com)
  */
-public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
+public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> {
 
     private static final String COL_NOMBRE = "Nombre";
     private static final String COL_PRIORIDAD = "Prioridad";
@@ -29,11 +32,10 @@ public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
                 Column.builder().name(COL_URL_ONLINE).build()
         );
 
-        this.personalize();
     }
 
-    private void personalize() {
-        //addActionsExtra();
+    @Override
+    protected void personalize() {
         this.setAdjustColumns(true);
         this.setHeaderText("Proyectos activos");
         this.setIcon(KanbanModuleNavigator.ICON_PROYECTO);
@@ -42,12 +44,8 @@ public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
     }
 
     @Override
-    public void update() {
-        try {
-            setCollection(KanbanSwingModule.proyectoUC.findAll());
-        } catch (Exception e) {
-            ExceptionHandler.handleException(e);
-        }
+    protected List<ProyectoDomain> getListUpdate() throws Exception {
+        return KanbanSwingModule.proyectoUC.findAll();
     }
 
     @Override
@@ -61,8 +59,18 @@ public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
     }
 
     @Override
-    protected void buttonNuevoActionListener() {
-        new DialogModelInput(this, ProyectoInputView.from());
+    protected void addPropertyChange() {
+        KanbanSwingModule.proyectoUC.addPropertyChangeListener(this);
+    }
+
+    @Override
+    protected ModelPanel<ProyectoDomain> getModelPanelNew() {
+        return ProyectoInputView.from();
+    }
+
+    @Override
+    protected ModelPanel<ProyectoDomain> getModelPanelEdit(ProyectoDomain obj) {
+        return ProyectoInputView.fromModel(obj);
     }
 
     @Override
@@ -75,26 +83,4 @@ public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
         return null;
     }
 
-    @Override
-    protected void editAction(ProyectoDomain obj) {
-        new DialogModelInput(this, ProyectoInputView.fromModel(obj));
-    }
-
-    @Override
-    protected void viewAction(ProyectoDomain obj) {
-        System.out.println("NO NECESARIO TODAVÍA.");
-    }
-    /*
-    private void addActionsExtra() {
-        this.addActionExtra(new AbstractAction("Contratar", MaterialIcons.ASSIGNMENT_IND.deriveIcon(18f)) {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onContratarEmpleadoActionPerformed();
-            }
-        });
-    }
-
-    private void onContratarEmpleadoActionPerformed() {
-        new DialogModelInput(this, ContratoEmpleadoInputView.from(getSelectedElement()));
-    }*/
 }
