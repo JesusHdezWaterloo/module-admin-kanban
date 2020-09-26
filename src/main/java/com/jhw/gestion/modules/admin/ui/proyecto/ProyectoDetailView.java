@@ -6,14 +6,11 @@ import com.jhw.files.utils.Opener;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
-import com.jhw.swing.models.detail._MaterialPanelDetail;
 import com.jhw.swing.material.components.table.Column;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanDetailCRUDDragDrop;
-import com.jhw.swing.models.input.dialogs.DialogModelInput;
 import com.jhw.swing.models.input.panels.ModelPanel;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
+import com.jhw.swing.util.ClipboardUtils;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
@@ -113,16 +110,11 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
                 }
             }
         });
-        this.addActionExtra(new AbstractAction("Copiar url local", MaterialIcons.COPYRIGHT) {
+        this.addActionExtra(new AbstractAction("Copiar url local", MaterialIcons.CONTENT_COPY) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Toolkit.getDefaultToolkit()
-                            .getSystemClipboard()
-                            .setContents(
-                                    new StringSelection(getSelectedElement().getUrlLocal()),
-                                    null
-                            );
+                    ClipboardUtils.copy(getSelectedElement().getUrlLocal());
                 } catch (Exception ex) {
                     ExceptionHandler.handleException(ex);
                 }
