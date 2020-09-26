@@ -1,15 +1,22 @@
 package com.jhw.gestion.modules.admin.ui.proyecto;
 
 import com.clean.core.app.services.ExceptionHandler;
+import com.jhw.files.utils.Browser;
+import com.jhw.files.utils.Opener;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanModuleNavigator;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.models.detail._MaterialPanelDetail;
 import com.jhw.swing.material.components.table.Column;
+import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanDetailCRUDDragDrop;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
 import com.jhw.swing.models.input.panels.ModelPanel;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.AbstractAction;
 
 /**
  *
@@ -36,6 +43,8 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
 
     @Override
     protected void personalize() {
+        addActionsElements();
+
         this.setAdjustColumns(true);
         this.setHeaderText("Proyectos activos");
         this.setIcon(KanbanModuleNavigator.ICON_PROYECTO);
@@ -81,6 +90,44 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
             ExceptionHandler.handleException(ex);
         }
         return null;
+    }
+
+    private void addActionsElements() {
+        this.addActionExtra(new AbstractAction("Ir a la carpeta", MaterialIcons.OPEN_IN_NEW) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Opener.from(getSelectedElement().getUrlLocal()).open();
+                } catch (Exception ex) {
+                    ExceptionHandler.handleException(ex);
+                }
+            }
+        });
+        this.addActionExtra(new AbstractAction("Ir al repo online", MaterialIcons.OPEN_IN_BROWSER) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Browser.from(getSelectedElement().getUrlRepoOnline()).browse();
+                } catch (Exception ex) {
+                    ExceptionHandler.handleException(ex);
+                }
+            }
+        });
+        this.addActionExtra(new AbstractAction("Copiar url local", MaterialIcons.COPYRIGHT) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Toolkit.getDefaultToolkit()
+                            .getSystemClipboard()
+                            .setContents(
+                                    new StringSelection(getSelectedElement().getUrlLocal()),
+                                    null
+                            );
+                } catch (Exception ex) {
+                    ExceptionHandler.handleException(ex);
+                }
+            }
+        });
     }
 
 }
