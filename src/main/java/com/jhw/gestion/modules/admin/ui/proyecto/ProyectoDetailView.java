@@ -15,12 +15,14 @@ import com.jhw.swing.models.input.dialogs.DialogModelInput;
 public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
 
     private static final String COL_NOMBRE = "Nombre";
-    private static final String COL_DESC = "Descripción";
+    private static final String COL_URL_LOCAL = "URL Local";
+    private static final String COL_URL_ONLINE = "URL Online";
 
     public ProyectoDetailView() {
         super(
                 Column.builder().name(COL_NOMBRE).build(),
-                Column.builder().name(COL_DESC).build()
+                Column.builder().name(COL_URL_LOCAL).build(),
+                Column.builder().name(COL_URL_ONLINE).build()
         );
 
         this.personalize();
@@ -48,7 +50,8 @@ public class ProyectoDetailView extends _MaterialPanelDetail<ProyectoDomain> {
     public Object[] getRowObject(ProyectoDomain obj) {
         return new Object[]{
             obj.getNombreProyecto(),
-            obj.getDescripcion()};
+            obj.getUrlLocal(),
+            obj.getUrlRepoOnline()};
     }
 
     @Override

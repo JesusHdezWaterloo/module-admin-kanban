@@ -50,11 +50,13 @@ public class KanbanModuleNavigator implements NavigationService {
         List<DashBoardComponent> list = new ArrayList<>();
         try {
             for (ProyectoDomain proyectoDomain : KanbanSwingModule.proyectoUC.findAll()) {
-                list.add(DashBoardComponent.from(
-                        proyectoDomain.getNombreProyecto(),
-                        ICON_KANBAN_PROJECT,
-                        KanbanModuleNavigator.GROUP + "." + proyectoDomain.getNombreProyecto(),
-                        KanbanProyecto.from(proyectoDomain)));
+                if (proyectoDomain.isKanban()) {
+                    list.add(DashBoardComponent.from(
+                            proyectoDomain.getNombreProyecto(),
+                            ICON_KANBAN_PROJECT,
+                            KanbanModuleNavigator.GROUP + "." + proyectoDomain.getNombreProyecto(),
+                            KanbanProyecto.from(proyectoDomain)));
+                }
             }
 
             list.add(DashBoardComponent.from(
