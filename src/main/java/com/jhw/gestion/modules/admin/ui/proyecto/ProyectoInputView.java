@@ -65,7 +65,7 @@ public class ProyectoInputView extends CleanCRUDInputView<ProyectoDomain> {
 
         textAreaDescripcion = MaterialPreparedTextAreaFactory.buildDescripcion();
 
-        VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder();
+        VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder(500);
 
         vlc.add(textFieldNombre);
         vlc.add(datePickerInicio);
