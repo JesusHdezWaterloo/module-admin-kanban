@@ -91,6 +91,14 @@ public class TareaInputView extends CleanCRUDInputView<TareaDomain> {
     // End of variables declaration
 
     @Override
+    public void update() {
+        super.update();
+        if (getOldModel() != null) {
+            proyectoICBS.setEnabled(false);
+        }
+    }
+
+    @Override
     public Map<String, Object> bindFields() {
         Map<String, Object> map = super.bindFields();
         map.put("nombreTarea", textFieldNombre);

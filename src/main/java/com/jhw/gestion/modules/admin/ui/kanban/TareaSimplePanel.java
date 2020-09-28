@@ -129,6 +129,9 @@ public class TareaSimplePanel extends _MaterialPanelComponent implements Update,
      */
     @Override
     public void setToolTipText(String text) {
+        if (text.trim().isEmpty()) {
+            return;
+        }
         text = "<html>" + text.replace("\n", "<br>") + "</html>";
         super.setToolTipText(text);
     }
