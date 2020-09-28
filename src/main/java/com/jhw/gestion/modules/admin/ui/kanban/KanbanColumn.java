@@ -28,6 +28,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
@@ -98,16 +99,16 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private void updateColumn() {
         try {
+            //no se puede usar un layout xq usan mig, y se tufa con el DnD
             panelTareas.removeAll();
-            VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder((int) panelTareas.getPreferredSize().getWidth());
-
+            JPanel inner = MaterialContainersFactory.buildPanelTransparent();
+            inner.setLayout(new GridLayout(tareas.size(), 1));
             for (TareaDomain tarea : tareas) {
                 if (tarea.test(header.getSearchText())) {
-                    vlcTareas.add(TareaSimplePanel.from(tarea));
+                    inner.add(TareaSimplePanel.from(tarea));
                 }
             }
-
-            panelTareas.add(vlcTareas.build());
+            panelTareas.add(inner, BorderLayout.NORTH);
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
