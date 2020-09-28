@@ -22,4 +22,14 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
         Collections.sort(l);
         return l;
     }
+
+    @Override
+    public TareaDomain edit(TareaDomain objectToUpdate) throws Exception {
+        TareaDomain tarea = findBy(objectToUpdate.getIdTarea());
+        if (!tarea.getProyectoFk().equals(objectToUpdate.getProyectoFk())) {
+            throw new RuntimeException("No se puede mover una tarea de proyecto. Bórrela y creela de nuevo");
+        }
+        return super.edit(objectToUpdate);
+    }
+
 }
