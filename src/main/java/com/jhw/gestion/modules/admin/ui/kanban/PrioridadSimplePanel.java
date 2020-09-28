@@ -9,6 +9,7 @@ import com.jhw.gestion.modules.admin.core.domain.PrioridadDomain;
 import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
+import com.jhw.swing.material.components.labels._MaterialLabel;
 import com.jhw.swing.util.interfaces.BindableComponent;
 import com.jhw.utils.interfaces.Update;
 import java.awt.Color;
@@ -32,7 +33,7 @@ public class PrioridadSimplePanel extends _MaterialPanelComponent implements Upd
 
     private void initComponents() {
         setGap(5);
-        labelPrioridad = MaterialLabelsFactory.build();
+        labelPrioridad = new _MaterialLabel();
         labelPrioridad.setHorizontalAlignment(SwingConstants.CENTER);
 
         this.add(labelPrioridad);
