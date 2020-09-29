@@ -9,6 +9,7 @@ import com.clean.core.app.services.ExceptionHandler;
 import com.jhw.gestion.modules.admin.core.domain.*;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.gestion.modules.admin.ui.tarea.TareaInputView;
+import com.jhw.swing.bundles.dnd.DropHandler;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
 import com.jhw.swing.material.components.container.layout.VerticalLayoutContainer;
 import com.jhw.swing.material.components.container.panel.*;
@@ -24,8 +25,12 @@ import com.jhw.swing.prepared.button.MaterialButtonAddEdit;
 import com.jhw.swing.prepared.button.MaterialPreparedButtonsFactory;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -47,6 +52,9 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private final ColumnaProyectVolatile colProy;
     private List<TareaDomain> tareas = new ArrayList<>();
+
+    private DropTarget dropTarget;
+    private DropHandler dropHandler;
 
     public KanbanColumn(ColumnaProyectVolatile colProy) {
         this.colProy = colProy;
@@ -91,16 +99,16 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
 
     private void updateColumn() {
         try {
+            //no se puede usar un layout xq usan mig, y se tufa con el DnD
             panelTareas.removeAll();
-            VerticalLayoutContainer.builder vlcTareas = VerticalLayoutContainer.builder((int) panelTareas.getPreferredSize().getWidth());
-
+            JPanel inner = MaterialContainersFactory.buildPanelTransparent();
+            inner.setLayout(new GridLayout(tareas.size(), 1));
             for (TareaDomain tarea : tareas) {
                 if (tarea.test(header.getSearchText())) {
-                    vlcTareas.add(TareaSimplePanel.from(tarea));
+                    inner.add(TareaSimplePanel.from(tarea));
                 }
             }
-
-            panelTareas.add(vlcTareas.build());
+            panelTareas.add(inner, BorderLayout.NORTH);
         } catch (Exception e) {
             ExceptionHandler.handleException(e);
         }
@@ -113,6 +121,30 @@ public class KanbanColumn extends _MaterialPanelComponent implements Update {
         header.setSearchActionListener((ActionEvent e) -> {
             updateColumn();
         });
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        dropHandler = new DropHandler() {
+            @Override
+            protected void doDrop(JPanel dragged, Component targetDrop) throws Exception {
+                if (dragged instanceof TareaSimplePanel) {
+                    TareaSimplePanel tarea = (TareaSimplePanel) dragged;
+                    TareaDomain t = tarea.getObject();
+                    t.setProyectoFk(colProy.getProyecto());
+                    t.setColumnaFk(colProy.getColumna());
+                    KanbanSwingModule.tareaUC.edit(t);
+                }
+            }
+        };
+        dropTarget = new DropTarget(this, DnDConstants.ACTION_MOVE, dropHandler, true);
+    }
+
+    @Override
+    public void removeNotify() {
+        super.removeNotify();
+        dropTarget.removeDropTargetListener(dropHandler);
     }
 
     private static class KanbanColumnHeader extends _PanelTransparent {

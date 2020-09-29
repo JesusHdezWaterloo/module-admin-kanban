@@ -43,25 +43,47 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Proyecto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_proyecto", nullable = false)
     private Integer idProyecto;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "nombre_proyecto", nullable = false, length = 100)
     private String nombreProyecto;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_inicio", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "kanban", nullable = false)
+    private boolean kanban;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "prioridad", nullable = false)
+    private int prioridad;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 500)
+    @Column(name = "url_local", nullable = false, length = 500)
+    private String urlLocal;
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(max = 500)
+    @Column(name = "url_repo_online", nullable = false, length = 500)
+    private String urlRepoOnline;
+
     @Basic(optional = false)
     @NotNull
     @Size(max = 500)
@@ -75,10 +97,14 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, String nombreProyecto, Date fechaInicio, String descripcion) {
+    public Proyecto(Integer idProyecto, String nombreProyecto, Date fechaInicio, boolean kanban, int prioridad, String urlLocal, String urlRepoOnline, String descripcion) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.fechaInicio = fechaInicio;
+        this.kanban = kanban;
+        this.prioridad = prioridad;
+        this.urlLocal = urlLocal;
+        this.urlRepoOnline = urlRepoOnline;
         this.descripcion = descripcion;
     }
 
@@ -88,6 +114,38 @@ public class Proyecto implements Serializable {
 
     public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
+    }
+
+    public boolean isKanban() {
+        return kanban;
+    }
+
+    public void setKanban(boolean kanban) {
+        this.kanban = kanban;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public String getUrlLocal() {
+        return urlLocal;
+    }
+
+    public void setUrlLocal(String urlLocal) {
+        this.urlLocal = urlLocal;
+    }
+
+    public String getUrlRepoOnline() {
+        return urlRepoOnline;
+    }
+
+    public void setUrlRepoOnline(String urlRepoOnline) {
+        this.urlRepoOnline = urlRepoOnline;
     }
 
     public String getNombreProyecto() {
@@ -138,5 +196,5 @@ public class Proyecto implements Serializable {
     public String toString() {
         return "com.jhw.gestion.modules.admin.repo.entities.Proyecto[ idProyecto=" + idProyecto + " ]";
     }
-    
+
 }

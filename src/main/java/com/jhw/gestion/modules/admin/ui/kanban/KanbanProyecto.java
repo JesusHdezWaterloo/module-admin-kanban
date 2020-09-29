@@ -9,6 +9,7 @@ import com.clean.core.app.services.ExceptionHandler;
 import com.jhw.gestion.modules.admin.core.domain.ColumnaDomain;
 import com.jhw.gestion.modules.admin.core.domain.ColumnaProyectVolatile;
 import com.jhw.gestion.modules.admin.core.domain.ProyectoDomain;
+import com.jhw.gestion.modules.admin.core.domain.TareaDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
 import com.jhw.swing.models.utils.UpdateListener;
@@ -24,13 +25,25 @@ import java.util.List;
  */
 public class KanbanProyecto extends _PanelGradient implements Update {
 
-    private final UpdateListener updList = new UpdateListener(this);
-
     public static KanbanProyecto from(ProyectoDomain proyecto) {
         return new KanbanProyecto(proyecto);
     }
 
     private final ProyectoDomain proyecto;
+
+    private final UpdateListener updList = new UpdateListener(this) {
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            //si es una tarea pero no es de este proyecto, no actualizo
+            if (evt.getNewValue() instanceof TareaDomain) {
+                TareaDomain t = (TareaDomain) evt.getNewValue();
+                if (!t.getProyectoFk().equals(proyecto)) {
+                    return;
+                }
+            }
+            super.propertyChange(evt);
+        }
+    };
 
     public KanbanProyecto(ProyectoDomain proyecto) {
         this.proyecto = proyecto;

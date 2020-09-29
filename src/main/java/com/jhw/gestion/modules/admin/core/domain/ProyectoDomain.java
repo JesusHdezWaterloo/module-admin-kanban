@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
+@SortBy(priority = {"prioridad"}, order = SortBy.DESCENDING)
 @SortBy(priority = {"nombreProyecto"})
 public class ProyectoDomain extends EntityDomainObjectValidated {
 
@@ -28,15 +29,29 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
     @NotNull(message = "#msg.module.admin.validation.proyecto_fecha_null#")
     private Date fechaInicio;
 
+    private boolean kanban;
+
+    private int prioridad;
+
+    @Size(max = 495, message = "#msg.module.admin.validation.proyecto_url_local_largo#")
+    private String urlLocal;
+
+    @Size(max = 495, message = "#msg.module.admin.validation.proyecto_url_repo_online_largo#")
+    private String urlRepoOnline;
+
     @Size(max = 495, message = "#msg.module.contabilidad.validation.descripcion_larga#")
     private String descripcion;
 
     public ProyectoDomain() {
     }
 
-    public ProyectoDomain(String nombreProyecto, Date fechaInicio, String descripcion) {
+    public ProyectoDomain(String nombreProyecto, Date fechaInicio, boolean kanban, int prioridad, String urlLocal, String urlRepoOnline, String descripcion) {
         this.nombreProyecto = nombreProyecto;
         this.fechaInicio = fechaInicio;
+        this.kanban = kanban;
+        this.prioridad = prioridad;
+        this.urlLocal = urlLocal;
+        this.urlRepoOnline = urlRepoOnline;
         this.descripcion = descripcion;
     }
 
@@ -46,6 +61,38 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
 
     public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
+    }
+
+    public boolean isKanban() {
+        return kanban;
+    }
+
+    public void setKanban(boolean kanban) {
+        this.kanban = kanban;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public String getUrlLocal() {
+        return urlLocal;
+    }
+
+    public void setUrlLocal(String urlLocal) {
+        this.urlLocal = urlLocal;
+    }
+
+    public String getUrlRepoOnline() {
+        return urlRepoOnline;
+    }
+
+    public void setUrlRepoOnline(String urlRepoOnline) {
+        this.urlRepoOnline = urlRepoOnline;
     }
 
     public String getNombreProyecto() {

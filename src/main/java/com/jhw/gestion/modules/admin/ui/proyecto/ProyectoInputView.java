@@ -11,8 +11,11 @@ import com.jhw.swing.material.components.textarea.MaterialTextArea;
 import com.jhw.swing.prepared.textarea.MaterialPreparedTextAreaFactory;
 import com.jhw.swing.material.components.textfield.MaterialTextFactory;
 import com.jhw.swing.material.components.textfield.MaterialTextFieldIcon;
+import com.jhw.swing.material.components.toggle.MaterialToggleButton;
+import com.jhw.swing.material.components.toggle.MaterialToggleFactory;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanCRUDInputView;
+import com.jhw.swing.prepared.textfield.MaterialPreparedTextFactory;
 import java.util.Map;
 
 /**
@@ -47,12 +50,29 @@ public class ProyectoInputView extends CleanCRUDInputView<ProyectoDomain> {
         datePickerInicio.setHint("Fecha de inicio del proyecto");
         datePickerInicio.setLabel("Inicio");
 
+        buttonKanban = MaterialToggleFactory.buildCheckBox();
+        buttonKanban.setText("Usar Kanban");
+
+        textFieldPrioridad = MaterialPreparedTextFactory.buildIntegerIcon();
+        textFieldPrioridad.setLabel("Prioridad");
+        textFieldPrioridad.setHint("Prioridad del proyecto");
+
+        textFieldUrlLocal = MaterialTextFactory.buildIcon();
+        textFieldUrlLocal.setLabel("URL local");
+
+        textFieldUrlRepoOnline = MaterialTextFactory.buildIcon();
+        textFieldUrlRepoOnline.setLabel("URL repo Online");
+
         textAreaDescripcion = MaterialPreparedTextAreaFactory.buildDescripcion();
 
-        VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder();
+        VerticalLayoutContainer.builder vlc = VerticalLayoutContainer.builder(500);
 
         vlc.add(textFieldNombre);
         vlc.add(datePickerInicio);
+        vlc.add(buttonKanban);
+        vlc.add(textFieldPrioridad);
+        vlc.add(textFieldUrlLocal);
+        vlc.add(textFieldUrlRepoOnline);
         vlc.add(textAreaDescripcion, true);
 
         this.setComponent(vlc.build());
@@ -61,6 +81,10 @@ public class ProyectoInputView extends CleanCRUDInputView<ProyectoDomain> {
     // Variables declaration - do not modify
     private MaterialTextFieldIcon textFieldNombre;
     private MaterialDatePickerIcon datePickerInicio;
+    private MaterialToggleButton buttonKanban;
+    private MaterialTextFieldIcon textFieldPrioridad;
+    private MaterialTextFieldIcon textFieldUrlLocal;
+    private MaterialTextFieldIcon textFieldUrlRepoOnline;
     private MaterialTextArea textAreaDescripcion;
     // End of variables declaration
 
@@ -69,6 +93,10 @@ public class ProyectoInputView extends CleanCRUDInputView<ProyectoDomain> {
         Map<String, Object> map = super.bindFields();
         map.put("nombreProyecto", textFieldNombre);
         map.put("fechaInicio", datePickerInicio);
+        map.put("kanban", buttonKanban);
+        map.put("prioridad", textFieldPrioridad);
+        map.put("urlLocal", textFieldUrlLocal);
+        map.put("urlRepoOnline", textFieldUrlRepoOnline);
         map.put("descripcion", textAreaDescripcion);
         return map;
     }

@@ -5,6 +5,7 @@
  */
 package com.jhw.gestion.modules.admin.core.domain;
 
+import com.clean.core.utils.SortBy;
 import com.jhw.gestion.modules.admin.core.utils.FibonacciNumber;
 import com.jhw.utils.clean.EntityDomainObjectValidated;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
+//orden por comparable
 public class TareaDomain extends EntityDomainObjectValidated implements Comparable<TareaDomain> {
 
     private Integer idTarea;
@@ -145,10 +147,10 @@ public class TareaDomain extends EntityDomainObjectValidated implements Comparab
     }
 
     @Override
-    public int compareTo(TareaDomain o) {
-        int prior = this.prioridadFk.compareTo(o.prioridadFk);
+    public int compareTo(TareaDomain o) {// el - para que ordene de mayor a menor
+        int prior = -this.prioridadFk.compareTo(o.prioridadFk);
         if (prior == 0) {
-            return Integer.compare(puntos, o.puntos);
+            return -Integer.compare(puntos, o.puntos);
         }
         return prior;
     }
