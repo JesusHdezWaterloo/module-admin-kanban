@@ -21,8 +21,8 @@ public class FibonacciNumberUtils {
                 : Arrays.binarySearch(generateFibboNumbers(30), value) >= 0;
     }
 
-    public static int[] generateFibboFixed() {
-        return new int[]{1, 2, 3, 5, 8, 13, 21, 40, 100, 999};
+    public static Integer[] generateFibboFixed() {
+        return new Integer[]{1, 2, 3, 5, 8, 13, 21, 40, 100, 999};
     }
 
     public static int[] generateFibboNumbers(int amount) {
