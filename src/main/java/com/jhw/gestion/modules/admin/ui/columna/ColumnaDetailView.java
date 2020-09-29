@@ -16,11 +16,13 @@ import com.jhw.swing.models.input.dialogs.DialogModelInput;
 public class ColumnaDetailView extends _MaterialPanelDetail<ColumnaDomain> {
 
     private static final String COL_NOMBRE = "Nombre";
+    private static final String COL_POS = "Posición";
     private static final String COL_DESC = "Descripción";
 
     public ColumnaDetailView() {
         super(
                 Column.builder().name(COL_NOMBRE).build(),
+                Column.builder().name(COL_POS).build(),
                 Column.builder().name(COL_DESC).build()
         );
 
@@ -49,6 +51,7 @@ public class ColumnaDetailView extends _MaterialPanelDetail<ColumnaDomain> {
     public Object[] getRowObject(ColumnaDomain obj) {
         return new Object[]{
             obj.getNombreColumna(),
+            obj.getPosicion(),
             obj.getDescripcion()};
     }
 

@@ -19,8 +19,6 @@ public class PuntosICBS extends InputComboBoxSelection<Integer> {
     public PuntosICBS() {
         setLabel("Puntos");
         setButtonNuevoVisibility(false);
-        setIcon(MaterialIcons.ACCESSIBILITY);
-        setIcon(null);
     }
 
     @Override
