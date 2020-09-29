@@ -53,14 +53,14 @@ public class TareaInputView extends CleanCRUDInputView<TareaDomain> {
         textFieldCodigo.setLabel("Código");
         textFieldCodigo.setIcon(MaterialIcons.PRIORITY_HIGH);
 
-        textFieldPuntos = MaterialPreparedTextFactory.buildInteger();
-        textFieldPuntos.setHint("Puntos de la tarea");
-        textFieldPuntos.setLabel("Puntos");
+        puntosICBS = new PuntosICBS();
+        puntosICBS.setHint("Puntos de la tarea");
+        puntosICBS.setLabel("Puntos");
 
         HorizontalLayoutContainer.builder hlc = HorizontalLayoutContainer.builder();
 
         hlc.add(textFieldCodigo);
-        hlc.add(HorizontalLayoutComponent.builder(textFieldPuntos).gapLeft(5).build());
+        hlc.add(HorizontalLayoutComponent.builder(puntosICBS).gapLeft(5).build());
 
         prioridadICBS = new PrioridadICBSPopup();
         columnaICBS = new ColumnaICBS();
@@ -83,7 +83,7 @@ public class TareaInputView extends CleanCRUDInputView<TareaDomain> {
     // Variables declaration - do not modify
     private MaterialTextFieldIcon<String> textFieldNombre;
     private MaterialTextFieldIcon textFieldCodigo;
-    private MaterialTextField<Integer> textFieldPuntos;
+    private PuntosICBS puntosICBS;
     private ColumnaICBS columnaICBS;
     private ProyectoICBS proyectoICBS;
     private PrioridadICBSPopup prioridadICBS;
@@ -104,7 +104,7 @@ public class TareaInputView extends CleanCRUDInputView<TareaDomain> {
         map.put("nombreTarea", textFieldNombre);
         map.put("codigoTarea", textFieldCodigo);
         map.put("prioridadFk", prioridadICBS);
-        map.put("puntos", textFieldPuntos);
+        map.put("puntos", puntosICBS);
         map.put("columnaFk", columnaICBS);
         map.put("proyectoFk", proyectoICBS);
         map.put("descripcion", textAreaDescripcion);
