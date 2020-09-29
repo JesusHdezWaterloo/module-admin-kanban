@@ -3,6 +3,7 @@ package com.jhw.gestion.modules.admin.ui.prioridad;
 import com.jhw.gestion.modules.admin.core.domain.PrioridadDomain;
 import com.jhw.gestion.modules.admin.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.standards.MaterialColors;
+import com.jhw.swing.material.standards.MaterialFontRoboto;
 import com.jhw.swing.models.example.*;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.material.standards.example.MATERIAL_ICONS_EXAMPLE;
@@ -11,6 +12,8 @@ import com.jhw.swing.models.input.icbs.InputComboBoxSelection;
 import com.jhw.swing.models.input.panels.ModelPanel;
 import com.jhw.swing.models.input.popup_selection.InputPopupSelection;
 import com.jhw.swing.util.AbstractActionUtils;
+import com.jhw.swing.util.Utils;
+import com.jhw.swing.utils.icons.IconTTF;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,8 +43,15 @@ public class PrioridadICBSPopup extends InputPopupSelection<PrioridadDomain> {
 
     @Override
     protected Action convert(PrioridadDomain obj) {
-        Action a = AbstractActionUtils.from(obj.getNombrePrioridad(), MaterialIcons.ADD);
-        a.putValue(AbstractActionUtils.KEY_BACKGROUND, new Color(obj.getColor()));
+        Color c = new Color(obj.getColor());
+        Action a = AbstractActionUtils.from(
+                obj.abreviatura(),
+                IconTTF.extractIcon(MaterialFontRoboto.BOLD,
+                        String.valueOf(obj.getValorComparable()),
+                        Utils.getForegroundAccording(c),
+                        20f));
+        a.putValue(AbstractActionUtils.KEY_BACKGROUND, c);
+        a.putValue(Action.SHORT_DESCRIPTION, obj.getNombrePrioridad());
         return a;
     }
 
