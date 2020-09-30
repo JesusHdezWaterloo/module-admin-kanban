@@ -16,7 +16,6 @@ import com.jhw.swing.models.utils.UpdateListener;
 import com.jhw.utils.interfaces.Update;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 /**
