@@ -39,6 +39,20 @@ public class PrioridadDomain extends EntityDomainObjectValidated implements Comp
         this.descripcion = descripcion;
     }
 
+    public String abreviatura() {
+        int mid = 3;
+        int l = nombrePrioridad.length();
+        if (l <= mid + 1) {
+            return nombrePrioridad;
+        } else {
+            String[] spl = nombrePrioridad.split(" ");
+            if (spl.length > 1) {
+                return spl[1].substring(0, Math.min(mid, l)) + ".";
+            }
+            return nombrePrioridad.substring(0, Math.min(mid, l)) + ".";
+        }
+    }
+
     public Integer getIdPrioridad() {
         return idPrioridad;
     }

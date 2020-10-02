@@ -19,7 +19,7 @@ import java.util.List;
 public class KanbanModuleNavigator implements NavigationService {
 
     //test mientras tanto
-    public static final DerivableIcon ICON_KANBAN_PROJECT = MaterialIcons.TEC_NB;
+    public static final DerivableIcon ICON_KANBAN_PROJECT = MaterialIcons.GRID_ON;
 
     public static final String GROUP = "modulos.kanaban";
 
@@ -27,18 +27,15 @@ public class KanbanModuleNavigator implements NavigationService {
     public static final String PROYECTO = "Proyecto";
     public static final String COLUMNA = "Columna";
     public static final String PRIORIDAD = "Prioridad";
-    public static final String TAREA = "Tarea";
 
-    public static final DerivableIcon ICON_KANBAN = MaterialIcons.GRID_ON;
-    public static final DerivableIcon ICON_PROYECTO = MaterialIcons.ACCOUNT_BOX;
-    public static final DerivableIcon ICON_COLUMNA = MaterialIcons.ACCOUNT_BOX;
+    public static final DerivableIcon ICON_KANBAN = MaterialIcons.DASHBOARD;
+    public static final DerivableIcon ICON_PROYECTO = MaterialIcons.NEXT_WEEK;
+    public static final DerivableIcon ICON_COLUMNA = MaterialIcons.VIEW_COLUMN;
     public static final DerivableIcon ICON_PRIORIDAD = MaterialIcons.WARNING;
-    public static final DerivableIcon ICON_TAREA = MaterialIcons.HOME;
 
     public static final String NAV_PROYECTO = GROUP + ".proyecto";
     public static final String NAV_COLUMNA = GROUP + ".columna";
     public static final String NAV_PRIORIDAD = GROUP + ".prioridad";
-    public static final String NAV_TAREA = GROUP + ".tarea";
 
     @Override
     public void navigateTo(String string, Object... os) {
