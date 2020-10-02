@@ -1,0 +1,3 @@
+//Ultima DB 3
+//Cambios a tarea
+ALTER TABLE `tarea` ADD `last_change` DATE NOT NULL AFTER `columna_fk`; 
