@@ -40,6 +40,8 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
             return l.stream().filter(
                     (TareaDomain t) -> t.getLastChange().after(lastMonth)
             ).sorted().collect(Collectors.toList());
+        } else {
+            Collections.sort(l);
         }
         return l;
     }
