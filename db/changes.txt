@@ -1,3 +1,8 @@
-//Ultima DB 3
+//Ultima DB: 3
 //Cambios a tarea
 ALTER TABLE `tarea` ADD `last_change` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `columna_fk`; 
+
+//Ultima DB: 4
+//Unique en codigo-proyecto
+ALTER TABLE `tarea` DROP INDEX `codigo_tarea`;
+ALTER TABLE `tarea` ADD UNIQUE KEY `UNIQUE_COD_PROY` (`codigo_tarea`,`proyecto_fk`);
