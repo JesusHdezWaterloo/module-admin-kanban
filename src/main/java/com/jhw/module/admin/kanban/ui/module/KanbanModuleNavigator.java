@@ -9,8 +9,10 @@ import com.jhw.module.admin.kanban.ui.kanban.KanbanProyecto;
 import com.jhw.module.admin.kanban.ui.prioridad.PrioridadDetailMainPanel;
 import com.jhw.module.admin.kanban.ui.proyecto.ProyectoDetailView;
 import com.jhw.module.admin.kanban.ui.tarea.TareaDetailViewHistorico;
+import com.jhw.module.admin.kanban.ui.utils.KanbanIcons;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.derivable_icons.DerivableIcon;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ import java.util.List;
 public class KanbanModuleNavigator implements NavigationService {
 
     //test mientras tanto
-    public static final DerivableIcon ICON_KANBAN_PROJECT = MaterialIcons.GRID_ON;
+    public static final DerivableIcon ICON_KANBAN_PROJECT = KanbanIcons.KANBAN;//MaterialIcons.GRID_ON;
 
     public static final String GROUP = "modulos.kanaban";
 
