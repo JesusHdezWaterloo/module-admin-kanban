@@ -7,6 +7,7 @@ package com.jhw.module.admin.kanban.repo.entities;
 
 import com.jhw.module.admin.kanban.repo.utils.ResourcesKanban;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -63,7 +66,7 @@ public class Tarea implements Serializable {
     @NotNull
     @Column(name = "puntos", nullable = false)
     private int puntos;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(max = 1000)
@@ -82,6 +85,12 @@ public class Tarea implements Serializable {
     @ManyToOne(optional = false)
     private Columna columnaFk;
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "last_change", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date lastChange;
+
     public Tarea() {
     }
 
@@ -89,12 +98,24 @@ public class Tarea implements Serializable {
         this.idTarea = idTarea;
     }
 
-    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea, int puntos, String descripcion) {
+    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea, int puntos, String descripcion, Prioridad prioridadFk, Proyecto proyectoFk, Columna columnaFk, Date lastChange) {
         this.idTarea = idTarea;
         this.nombreTarea = nombreTarea;
         this.codigoTarea = codigoTarea;
         this.puntos = puntos;
         this.descripcion = descripcion;
+        this.prioridadFk = prioridadFk;
+        this.proyectoFk = proyectoFk;
+        this.columnaFk = columnaFk;
+        this.lastChange = lastChange;
+    }
+
+    public Date getLastChange() {
+        return lastChange;
+    }
+
+    public void setLastChange(Date lastChange) {
+        this.lastChange = lastChange;
     }
 
     public Integer getIdTarea() {
