@@ -11,12 +11,20 @@ import com.jhw.module.admin.kanban.core.domain.ColumnaProyectVolatile;
 import com.jhw.module.admin.kanban.core.domain.ProyectoDomain;
 import com.jhw.module.admin.kanban.core.domain.TareaDomain;
 import com.jhw.module.admin.kanban.ui.module.KanbanSwingModule;
+import com.jhw.swing.material.components.container.MaterialContainersFactory;
+import com.jhw.swing.material.components.container.panel._MaterialPanelComponent;
 import com.jhw.swing.material.components.container.panel._PanelGradient;
+import com.jhw.swing.material.components.labels.MaterialLabel;
+import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
+import com.jhw.swing.material.standards.MaterialFontRoboto;
 import com.jhw.swing.models.utils.UpdateListener;
 import com.jhw.utils.interfaces.Update;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -46,28 +54,52 @@ public class KanbanProyecto extends _PanelGradient implements Update {
 
     public KanbanProyecto(ProyectoDomain proyecto) {
         this.proyecto = proyecto;
+        initComponents();
         addPropertyListeners();
         update();
     }
 
+    private void initComponents() {
+        this.setLayout(new BorderLayout());
+
+        _MaterialPanelComponent up = (_MaterialPanelComponent) MaterialContainersFactory.buildPanelComponent();
+        up.setGap(3);
+        up.setLayout(new BorderLayout());
+
+        labelNombreProyecto = MaterialLabelsFactory.build();
+        labelNombreProyecto.setHorizontalAlignment(SwingConstants.CENTER);
+        labelNombreProyecto.setFont(MaterialFontRoboto.BOLD.deriveFont(24f));
+
+        up.add(labelNombreProyecto);
+
+        panelColumnas = MaterialContainersFactory.buildPanelTransparent();
+
+        this.add(up, BorderLayout.NORTH);
+        this.add(panelColumnas, BorderLayout.CENTER);
+    }
+
+    private JPanel panelColumnas;
+    private MaterialLabel labelNombreProyecto;
+
     @Override
     public void update() {
         updateColumns();
+        labelNombreProyecto.setText(proyecto.getNombreProyecto());
     }
 
     private void updateColumns() {
         try {
-            this.removeAll();//quito todo
+            panelColumnas.removeAll();//quito todo
 
             //busco las columnas
             List<ColumnaDomain> columnas = KanbanSwingModule.columnaUC.findAll();
 
             //pongo el layout en dependencia de las columnas
-            this.setLayout(new GridLayout(1, columnas.size()));
+            panelColumnas.setLayout(new GridLayout(1, columnas.size()));
 
             //relleno las columnas
             for (ColumnaDomain c : columnas) {
-                this.add(KanbanColumn.from(new ColumnaProyectVolatile(proyecto, c)));
+                panelColumnas.add(KanbanColumn.from(new ColumnaProyectVolatile(proyecto, c)));
             }
         } catch (Exception e) {
             ExceptionHandler.handleException(e);

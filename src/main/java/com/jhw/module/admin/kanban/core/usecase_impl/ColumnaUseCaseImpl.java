@@ -14,4 +14,14 @@ public class ColumnaUseCaseImpl extends DefaultCRUDUseCase<ColumnaDomain> implem
         super.setRepo(repo);
     }
 
+    @Override
+    public ColumnaDomain findFirst() throws Exception {
+        return count() == 0 ? null : findAll().get(0);
+    }
+
+    @Override
+    public ColumnaDomain findLast() throws Exception {
+        int count = count();
+        return count == 0 ? null : findAll().get(count - 1);
+    }
 }

@@ -5,4 +5,8 @@ import com.jhw.module.admin.kanban.core.domain.ColumnaDomain;
 
 public interface ColumnaUseCase extends CRUDUseCase<ColumnaDomain> {
 
+    public ColumnaDomain findFirst() throws Exception;
+
+    public ColumnaDomain findLast() throws Exception;
+
 }
