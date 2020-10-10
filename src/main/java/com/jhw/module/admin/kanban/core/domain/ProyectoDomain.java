@@ -7,6 +7,7 @@ package com.jhw.module.admin.kanban.core.domain;
 
 import com.clean.core.utils.SortBy;
 import com.jhw.utils.clean.EntityDomainObjectValidated;
+import java.io.File;
 import java.util.Date;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,8 @@ import javax.validation.constraints.Size;
 @SortBy(priority = {"prioridad"}, order = SortBy.DESCENDING)
 @SortBy(priority = {"nombreProyecto"})
 public class ProyectoDomain extends EntityDomainObjectValidated {
+
+    public static final int CARPETAS_UP = 1;
 
     private Integer idProyecto;
 
@@ -53,6 +56,28 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
         this.urlLocal = urlLocal;
         this.urlRepoOnline = urlRepoOnline;
         this.descripcion = descripcion;
+    }
+
+    public boolean hasGithub() {
+        return urlRepoOnline.startsWith("https://github.com/") && urlRepoOnline.endsWith(".git");
+    }
+
+    public String urlLocalFixed() {
+        try {
+            File f = new File(urlLocal);
+            String fix = f.getName();
+            for (int i = 0; i < CARPETAS_UP; i++) {
+                f = f.getParentFile();
+                if (f == null) {
+                    break;
+                }
+                fix = f.getName() + "\\" + fix;
+            }
+            fix = "\\...\\" + fix;
+            return fix;
+        } catch (Exception e) {
+            return "Sin URL local";
+        }
     }
 
     public Integer getIdProyecto() {
