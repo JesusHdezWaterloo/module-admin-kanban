@@ -60,8 +60,8 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
             obj.getNombreProyecto(),
             obj.getPrioridad(),
             obj.isKanban() ? "SI" : "NO",
-            obj.getUrlLocal(),
-            obj.getUrlRepoOnline()};
+            obj.urlLocalFixed(),
+            obj.hasGithub() ? "SI" : "NO"};
     }
 
     @Override
