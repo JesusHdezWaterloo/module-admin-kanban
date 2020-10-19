@@ -6,14 +6,23 @@ import com.jhw.utils.file.Opener;
 import com.jhw.module.admin.kanban.core.domain.ProyectoDomain;
 import com.jhw.module.admin.kanban.ui.module.KanbanModuleNavigator;
 import com.jhw.module.admin.kanban.ui.module.KanbanSwingModule;
+import com.jhw.swing.material.components.container.MaterialContainersFactory;
+import com.jhw.swing.material.components.labels.MaterialLabel;
+import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
 import com.jhw.swing.material.components.table.Column;
+import com.jhw.swing.material.components.table.editors_renders.component.ComponentCellRender;
+import com.jhw.swing.material.standards.MaterialColors;
 import com.jhw.swing.material.standards.MaterialIcons;
 import com.jhw.swing.models.clean.CleanDetailCRUDDragDrop;
 import com.jhw.swing.models.input.panels.ModelPanel;
 import com.jhw.swing.util.ClipboardUtils;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 /**
  *
@@ -25,7 +34,7 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
     private static final String COL_PRIORIDAD = "Prioridad";
     private static final String COL_KANBAN = "Kanban";
     private static final String COL_URL_LOCAL = "URL Local";
-    private static final String COL_URL_ONLINE = "URL Online";
+    private static final String COL_GITHUB = "GitHub";
 
     public ProyectoDetailView() {
         super(
@@ -33,7 +42,7 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
                 Column.builder().name(COL_PRIORIDAD).build(),
                 Column.builder().name(COL_KANBAN).build(),
                 Column.builder().name(COL_URL_LOCAL).build(),
-                Column.builder().name(COL_URL_ONLINE).build()
+                Column.builder().name(COL_GITHUB).build()
         );
 
     }
@@ -45,6 +54,8 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
         this.setAdjustColumns(true);
         this.setHeaderText("Proyectos activos");
         this.setIcon(KanbanModuleNavigator.ICON_PROYECTO);
+
+        getTable().getColumn(COL_GITHUB).setCellRenderer(new ComponentCellRender(false));
 
         this.setActionColumnButtonsVisivility(true, true, false);//no pone el view, no esta implementado todavia
     }
@@ -60,8 +71,22 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
             obj.getNombreProyecto(),
             obj.getPrioridad(),
             obj.isKanban() ? "SI" : "NO",
-            obj.getUrlLocal(),
-            obj.getUrlRepoOnline()};
+            obj.urlLocalFixed(),
+            getHasGithub(obj)};
+    }
+
+    private JPanel getHasGithub(ProyectoDomain obj) {
+        JPanel panel = MaterialContainersFactory.buildPanelGradient();
+        panel.setLayout(new BorderLayout());
+
+        MaterialLabel label = MaterialLabelsFactory.build();
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(UIManager.getFont("Table.font"));
+        label.setText(obj.hasGithub() ? "SI" : "NO");
+        panel.add(label);
+
+        panel.setBackground(obj.hasGithub() ? MaterialColors.GREENA_100 : MaterialColors.REDA_100);
+        return panel;
     }
 
     @Override

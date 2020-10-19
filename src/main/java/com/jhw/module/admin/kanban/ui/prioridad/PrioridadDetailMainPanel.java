@@ -14,6 +14,7 @@ import com.jhw.swing.material.components.container.panel._MaterialPanel;
 import com.jhw.swing.material.standards.MaterialShadow;
 import com.jhw.swing.models.detail.HeaderDetailPanel;
 import com.jhw.swing.models.input.dialogs.DialogModelInput;
+import com.jhw.swing.models.utils.UpdateListener;
 import com.jhw.utils.interfaces.Update;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -29,10 +30,12 @@ import javax.swing.border.EmptyBorder;
  */
 public class PrioridadDetailMainPanel extends _MaterialPanel implements Update {
 
+    private final UpdateListener updList = new UpdateListener(this);
+
     public PrioridadDetailMainPanel() {
         initComponents();
         addListeners();
-
+        addPropertyListeners();
         setHeader("Prioridades");
         setIcon(KanbanModuleNavigator.ICON_PRIORIDAD);
     }
@@ -108,4 +111,7 @@ public class PrioridadDetailMainPanel extends _MaterialPanel implements Update {
         }
     }
 
+    private void addPropertyListeners() {
+        KanbanSwingModule.prioridadUC.addPropertyChangeListener(updList);
+    }
 }

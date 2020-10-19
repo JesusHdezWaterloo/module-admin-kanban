@@ -22,7 +22,7 @@ public class KanbanRepoModule extends DefaultAbstractModule {
 
     public static KanbanRepoModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de nomina no se ha inicializado");
+            throw new NullPointerException("El modulo de Kanban no se ha inicializado");
         }
         return INSTANCE;
     }
@@ -39,7 +39,7 @@ public class KanbanRepoModule extends DefaultAbstractModule {
 
     @Override
     public String getModuleName() {
-        return "Nomina Repo Module";
+        return "Kanban Repo Module";
     }
 
 }
