@@ -19,6 +19,7 @@ import com.jhw.swing.models.utils.UpdateListener;
 import com.jhw.utils.interfaces.Update;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class KanbanSwingModule extends DefaultAbstractSwingMainModule implements Update {
 
@@ -86,12 +87,7 @@ public class KanbanSwingModule extends DefaultAbstractSwingMainModule implements
         //agrega todo lo demas
         for (DashBoardComponent c : navigator.createComponents()) {
             dash.addView(c.nav, c.view);
-            menu.addMenuItem(new AbstractAction(c.name, c.icon) {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    app.navigateTo(c.nav);
-                }
-            });
+            menu.addMenuItem(c.buildAction(app));
         }
 
         //repinta el dashboard
