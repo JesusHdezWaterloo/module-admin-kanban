@@ -43,7 +43,7 @@ public class PrioridadInputView extends CleanCRUDInputView<PrioridadDomain> {
         textFieldNombre.setLabel("Prioridad");
         textFieldNombre.setIcon(MaterialIcons.PRIORITY_HIGH);
 
-        textFieldValor = MaterialPreparedTextFactory.buildIntegerIcon();
+        textFieldValor = MaterialPreparedTextFactory.buildIntegerIcon(true);
         textFieldValor.setIcon(MaterialIcons.EXPOSURE_PLUS_1);
         textFieldNombre.setHint("Valor para comparar");
         textFieldValor.setLabel("Valor");
