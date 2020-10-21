@@ -59,10 +59,6 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
         this.descripcion = descripcion;
     }
 
-    public boolean hasGithub() {
-        return urlRepoOnline.startsWith("https://github.com/") && urlRepoOnline.endsWith(".git");
-    }
-
     public String urlLocalFixed() {
         try {
             File f = new File(urlLocal);
