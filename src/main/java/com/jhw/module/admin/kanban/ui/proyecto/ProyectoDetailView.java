@@ -7,6 +7,7 @@ import com.jhw.module.admin.kanban.core.domain.ProyectoDomain;
 import com.jhw.module.admin.kanban.ui.module.KanbanModuleNavigator;
 import com.jhw.module.admin.kanban.ui.module.KanbanSwingModule;
 import com.jhw.swing.material.components.container.MaterialContainersFactory;
+import com.jhw.swing.material.components.container.layout.HorizontalLayoutContainer;
 import com.jhw.swing.material.components.labels.MaterialLabel;
 import com.jhw.swing.material.components.labels.MaterialLabelsFactory;
 import com.jhw.swing.material.components.table.Column;
@@ -79,13 +80,18 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
         JPanel panel = MaterialContainersFactory.buildPanelGradient();
         panel.setLayout(new BorderLayout());
 
+        boolean remote = KanbanSwingModule.proyectoUC.hasRemote(obj);
+
+        HorizontalLayoutContainer.builder hlc = HorizontalLayoutContainer.builder();
+        
         MaterialLabel label = MaterialLabelsFactory.build();
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(UIManager.getFont("Table.font"));
-        label.setText(obj.hasGithub() ? "SI" : "NO");
-        panel.add(label);
+        label.setIcon(remote ? MaterialIcons.TEC_GITHUB : null);
+        hlc.add(label);
 
-        panel.setBackground(obj.hasGithub() ? MaterialColors.GREENA_100 : MaterialColors.REDA_100);
+        panel.add(hlc.build());
+        panel.setBackground(remote ? MaterialColors.GREENA_100 : MaterialColors.REDA_100);
         return panel;
     }
 
@@ -140,6 +146,16 @@ public class ProyectoDetailView extends CleanDetailCRUDDragDrop<ProyectoDomain> 
             public void actionPerformed(ActionEvent e) {
                 try {
                     ClipboardUtils.copy(getSelectedElement().getUrlLocal());
+                } catch (Exception ex) {
+                    ExceptionHandler.handleException(ex);
+                }
+            }
+        });
+        this.addActionExtra(new AbstractAction("Update Repo Online", MaterialIcons.VERTICAL_ALIGN_TOP) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    //KanbanSwingModule.proyectoUC.updateRemote(getSelectedElement());
                 } catch (Exception ex) {
                     ExceptionHandler.handleException(ex);
                 }
