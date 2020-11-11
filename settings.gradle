@@ -1,4 +1,4 @@
-rootProject.name = 'module-admin-kanban'
+rootProject.name = 'module-admin-kanban-server'
 
 include ':clean-core-full'
 project(':clean-core-full').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\clean-core-full" as File
@@ -48,5 +48,5 @@ project(':utils-export').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Grad
 include ':utils-files'
 project(':utils-files').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\utils-files" as File
 
-include ':module-gestion-contabilidad_empresarial'
-project(':module-gestion-contabilidad_empresarial').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-gestion-contabilidad_empresarial" as File
+include ':module-admin-kanban-standard'
+project(':module-admin-kanban-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-admin-kanban-standard" as File
