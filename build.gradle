@@ -19,8 +19,6 @@ dependencies {
 
     implementation project(':clean-core-full')
     
-    implementation project(':utils-export')
-    implementation project(':utils-files')
     implementation project(':utils-core')
     implementation project(':utils-spring')
     
