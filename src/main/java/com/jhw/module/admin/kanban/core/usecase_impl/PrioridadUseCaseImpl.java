@@ -1,8 +1,8 @@
 package com.jhw.module.admin.kanban.core.usecase_impl;
 
+import com.jhw.module.admin.kanban.core.domain.PrioridadDomain;
+import com.jhw.module.admin.kanban.core.usecase_def.PrioridadUseCase;
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
-import com.jhw.module.admin.kanban.core.domain.*;
-import com.jhw.module.admin.kanban.core.usecase_def.*;
 import com.jhw.module.admin.kanban.core.repo_def.*;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import java.util.ArrayList;
