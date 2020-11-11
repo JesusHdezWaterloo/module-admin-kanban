@@ -9,6 +9,7 @@ import com.clean.core.utils.SortBy;
 import com.jhw.utils.clean.EntityDomainObjectValidated;
 import java.io.File;
 import java.util.Date;
+import java.util.StringTokenizer;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,10 +59,6 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
         this.descripcion = descripcion;
     }
 
-    public boolean hasGithub() {
-        return urlRepoOnline.startsWith("https://github.com/") && urlRepoOnline.endsWith(".git");
-    }
-
     public String urlLocalFixed() {
         try {
             File f = new File(urlLocal);
@@ -78,6 +75,34 @@ public class ProyectoDomain extends EntityDomainObjectValidated {
         } catch (Exception e) {
             return "Sin URL local";
         }
+    }
+
+    /**
+     * Si los nombres son muy grandes no se ven bien en un dashboard, por lo que
+     * se reducen para que quepan.
+     *
+     * @return
+     */
+    public String nameFixed() {
+        String fix = "";
+        StringTokenizer spl = new StringTokenizer(nombreProyecto, " ");
+        int c = spl.countTokens();
+        if (c <= 1) {
+            return nombreProyecto;
+        }
+        for (int i = 0; i < c - 1; i++) {
+            String pice = spl.nextToken();
+            if (pice.length() <= 1) {
+                fix += pice;
+            } else {
+                fix += (pice.charAt(0) + "").toUpperCase();
+            }
+            fix = fix.trim();
+        }
+        //pongo el ultimo token completo
+        fix += spl.nextToken().trim();
+        
+        return fix;
     }
 
     public Integer getIdProyecto() {

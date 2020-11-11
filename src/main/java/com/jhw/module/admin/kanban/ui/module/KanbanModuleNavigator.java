@@ -56,6 +56,7 @@ public class KanbanModuleNavigator implements NavigationService {
             for (ProyectoDomain proyectoDomain : KanbanSwingModule.proyectoUC.findAll()) {
                 if (proyectoDomain.isKanban()) {
                     list.add(DashBoardComponent.from(
+                            proyectoDomain.nameFixed(),
                             proyectoDomain.getNombreProyecto(),
                             ICON_KANBAN_PROJECT,
                             KanbanModuleNavigator.GROUP + "." + proyectoDomain.getNombreProyecto(),
