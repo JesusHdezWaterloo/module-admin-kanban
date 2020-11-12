@@ -3,6 +3,7 @@ package com.jhw.module.admin.kanban.core.usecase_impl;
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.jhw.module.admin.kanban.core.domain.ColumnaDomain;
 import com.jhw.module.admin.kanban.core.domain.ColumnaProyectVolatile;
+import com.jhw.module.admin.kanban.core.domain.MoveTarea;
 import com.jhw.module.admin.kanban.core.domain.TareaDomain;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.repo_def.TareaRepo;
@@ -68,9 +69,9 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     }
 
     @Override
-    public TareaDomain move(Integer idTarea, Integer idColumna) throws Exception {
-        TareaDomain tarea = findBy(idTarea);
-        ColumnaDomain col = columnaUC.findBy(idColumna);
+    public TareaDomain move(MoveTarea move) throws Exception {
+        TareaDomain tarea = findBy(move.getIdTarea());
+        ColumnaDomain col = columnaUC.findBy(move.getIdColumna());
         tarea.setColumnaFk(col);
 
         return this.edit(tarea);

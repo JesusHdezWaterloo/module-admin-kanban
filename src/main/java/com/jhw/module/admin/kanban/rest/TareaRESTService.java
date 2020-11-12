@@ -27,15 +27,15 @@ public class TareaRESTService extends RESTServiceTemplate<TareaDomain> implement
     }
 
     @Override
-    @GetMapping(TAREA_FIND_PATH)
+    @GetMapping(TAREA_FIND_BY_COL_PROY_PATH)
     public List<TareaDomain> findByColumnaProyecto(@PathVariable(COL_PROY) ColumnaProyectVolatile colProy) throws Exception {
         return tareaUC.findByColumnaProyecto(colProy);
     }
 
     @Override
-    @GetMapping(TAREA_MOVE_PATH)
-    public TareaDomain move(@PathVariable(TAREA) Integer idTarea, @PathVariable(COLUMNA) Integer idColumna) throws Exception {
-        return tareaUC.move(idTarea, idColumna);
+    @PostMapping(TAREA_MOVE_PATH)
+    public TareaDomain move(@RequestBody MoveTarea move) throws Exception {
+        return tareaUC.move(move);
     }
 
 }
