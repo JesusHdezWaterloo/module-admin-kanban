@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.jhw.module.admin'
 
-version = '2.0.0.RELEASE.20201111'
+version = '2.1.0.RELEASE.20201111'
 
 repositories {
     jcenter()
@@ -35,7 +35,5 @@ dependencies {
     //injection
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
-	
-    //JGit
-    compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.9.0.202009080501-r'
+    
 }

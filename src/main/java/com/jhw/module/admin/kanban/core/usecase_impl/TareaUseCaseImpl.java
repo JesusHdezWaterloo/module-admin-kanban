@@ -3,6 +3,7 @@ package com.jhw.module.admin.kanban.core.usecase_impl;
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.jhw.module.admin.kanban.core.domain.ColumnaDomain;
 import com.jhw.module.admin.kanban.core.domain.ColumnaProyectVolatile;
+import com.jhw.module.admin.kanban.core.domain.MoveTarea;
 import com.jhw.module.admin.kanban.core.domain.TareaDomain;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.repo_def.TareaRepo;
@@ -34,12 +35,12 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
      * @throws Exception
      */
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws Exception {
         List<TareaDomain> l = repo.findByColumnaProyecto(colProy);
 
         //si es de la ultima columna solo muestro el ultimo mes
         //si se quiere mostrar all comentar esta linea
-        if (colProy.getIdColumna().equals(columnaUC.findLast())) {//busca la ultima columna
+        if (colProy.idColumna.equals(columnaUC.findLast().getIdColumna())) {
             LocalDate mesPasado = LocalDate.from(YearMonth.now().minusMonths(1));
             return l.stream().filter(
                     (TareaDomain t) -> t.getLastChange().isAfter(mesPasado)
@@ -68,9 +69,9 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     }
 
     @Override
-    public TareaDomain move(Integer idTarea, Integer idColumna) throws Exception {
-        TareaDomain tarea = findBy(idTarea);
-        ColumnaDomain col = columnaUC.findBy(idColumna);
+    public TareaDomain move(MoveTarea move) throws Exception {
+        TareaDomain tarea = findBy(move.getIdTarea());
+        ColumnaDomain col = columnaUC.findBy(move.getIdColumna());
         tarea.setColumnaFk(col);
 
         return this.edit(tarea);
