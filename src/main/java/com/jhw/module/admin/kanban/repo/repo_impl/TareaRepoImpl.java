@@ -22,12 +22,12 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) {
         EntityManager em = getEntityManager();
 
         try {
-            Proyecto proy = ConverterService.convert(findBy(colProy.getIdProyecto()), Proyecto.class);
-            Columna col = ConverterService.convert(colRepoModule.findBy(colProy.getIdColumna()), Columna.class);
+            Proyecto proy = ConverterService.convert(findBy(colProy.idProyecto), Proyecto.class);
+            Columna col = ConverterService.convert(colRepoModule.findBy(colProy.idColumna), Columna.class);
 
             List<Tarea> list = em.createQuery(Tarea_findByColumnaProyecto, Tarea.class)
                     .setParameter("proyectoFk", proy)

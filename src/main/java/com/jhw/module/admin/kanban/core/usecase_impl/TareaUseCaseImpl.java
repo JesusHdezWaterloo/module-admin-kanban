@@ -35,12 +35,12 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
      * @throws Exception
      */
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws Exception {
         List<TareaDomain> l = repo.findByColumnaProyecto(colProy);
 
         //si es de la ultima columna solo muestro el ultimo mes
         //si se quiere mostrar all comentar esta linea
-        if (colProy.getIdColumna().equals(columnaUC.findLast())) {//busca la ultima columna
+        if (colProy.idColumna.equals(columnaUC.findLast().getIdColumna())) {
             LocalDate mesPasado = LocalDate.from(YearMonth.now().minusMonths(1));
             return l.stream().filter(
                     (TareaDomain t) -> t.getLastChange().isAfter(mesPasado)
