@@ -7,7 +7,7 @@ package com.jhw.module.admin.kanban.repo.entities;
 
 import com.jhw.module.admin.kanban.repo.utils.ResourcesKanban;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -59,8 +59,7 @@ public class Proyecto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_inicio", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Basic(optional = false)
     @NotNull
@@ -97,7 +96,7 @@ public class Proyecto implements Serializable {
         this.idProyecto = idProyecto;
     }
 
-    public Proyecto(Integer idProyecto, String nombreProyecto, Date fechaInicio, boolean kanban, int prioridad, String urlLocal, String urlRepoOnline, String descripcion) {
+    public Proyecto(Integer idProyecto, String nombreProyecto, LocalDate fechaInicio, boolean kanban, int prioridad, String urlLocal, String urlRepoOnline, String descripcion) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.fechaInicio = fechaInicio;
@@ -156,11 +155,11 @@ public class Proyecto implements Serializable {
         this.nombreProyecto = nombreProyecto;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 

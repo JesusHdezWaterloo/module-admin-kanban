@@ -7,7 +7,7 @@ package com.jhw.module.admin.kanban.repo.entities;
 
 import com.jhw.module.admin.kanban.repo.utils.ResourcesKanban;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -88,8 +88,7 @@ public class Tarea implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "last_change", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date lastChange;
+    private LocalDate lastChange;
 
     public Tarea() {
     }
@@ -98,7 +97,7 @@ public class Tarea implements Serializable {
         this.idTarea = idTarea;
     }
 
-    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea, int puntos, String descripcion, Prioridad prioridadFk, Proyecto proyectoFk, Columna columnaFk, Date lastChange) {
+    public Tarea(Integer idTarea, String nombreTarea, String codigoTarea, int puntos, String descripcion, Prioridad prioridadFk, Proyecto proyectoFk, Columna columnaFk, LocalDate lastChange) {
         this.idTarea = idTarea;
         this.nombreTarea = nombreTarea;
         this.codigoTarea = codigoTarea;
@@ -110,11 +109,11 @@ public class Tarea implements Serializable {
         this.lastChange = lastChange;
     }
 
-    public Date getLastChange() {
+    public LocalDate getLastChange() {
         return lastChange;
     }
 
-    public void setLastChange(Date lastChange) {
+    public void setLastChange(LocalDate lastChange) {
         this.lastChange = lastChange;
     }
 
