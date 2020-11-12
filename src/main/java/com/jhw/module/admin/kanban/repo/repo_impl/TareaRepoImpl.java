@@ -15,7 +15,8 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
 
     private final String Tarea_findByColumnaProyecto = "SELECT t FROM Tarea t WHERE t.proyectoFk = :proyectoFk AND t.columnaFk = :columnaFk";
 
-    private final ColumnaRepo colRepoModule = KanbanRepoModule.getInstance().getImplementation(ColumnaRepo.class);
+    private final ColumnaRepo colRepo = KanbanRepoModule.getInstance().getImplementation(ColumnaRepo.class);
+    private final ProyectoRepo proyRepo = KanbanRepoModule.getInstance().getImplementation(ProyectoRepo.class);
 
     public TareaRepoImpl() {
         super(ResourcesKanban.EMF, TareaDomain.class, Tarea.class);
@@ -26,8 +27,8 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
         EntityManager em = getEntityManager();
 
         try {
-            Proyecto proy = ConverterService.convert(findBy(colProy.idProyecto), Proyecto.class);
-            Columna col = ConverterService.convert(colRepoModule.findBy(colProy.idColumna), Columna.class);
+            Proyecto proy = ConverterService.convert(proyRepo.findBy(colProy.idProyecto), Proyecto.class);
+            Columna col = ConverterService.convert(colRepo.findBy(colProy.idColumna), Columna.class);
 
             List<Tarea> list = em.createQuery(Tarea_findByColumnaProyecto, Tarea.class)
                     .setParameter("proyectoFk", proy)
