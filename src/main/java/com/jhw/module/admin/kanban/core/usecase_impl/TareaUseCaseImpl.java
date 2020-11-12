@@ -41,7 +41,7 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
         //si es de la ultima columna solo muestro el ultimo mes
         //si se quiere mostrar all comentar esta linea
         if (colProy.idColumna.equals(columnaUC.findLast().getIdColumna())) {
-            LocalDate mesPasado = LocalDate.from(YearMonth.now().minusMonths(1));
+            LocalDate mesPasado = LocalDate.now().minusMonths(1);
             return l.stream().filter(
                     (TareaDomain t) -> t.getLastChange().isAfter(mesPasado)
             ).sorted().collect(Collectors.toList());
