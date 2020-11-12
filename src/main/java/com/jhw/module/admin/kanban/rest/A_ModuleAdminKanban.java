@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Jesus Hernandez Barrios (jhernandezb96@gmail.com)
  */
 @Component
-public class A_ModuleAdminKanbanEmpresarial {
+public class A_ModuleAdminKanban {
 
     public static final String BASE_PACKAGE = "com.jhw.module.admin.kanban";
 
