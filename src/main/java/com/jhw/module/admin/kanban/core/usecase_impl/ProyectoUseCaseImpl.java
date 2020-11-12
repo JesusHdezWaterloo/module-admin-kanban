@@ -1,19 +1,10 @@
 package com.jhw.module.admin.kanban.core.usecase_impl;
 
-import com.clean.core.app.services.Notification;
-import com.clean.core.app.services.NotificationsGeneralType;
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.jhw.module.admin.kanban.core.domain.ProyectoDomain;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.repo_def.ProyectoRepo;
 import com.jhw.module.admin.kanban.core.usecase_def.ProyectoUseCase;
-import java.util.List;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class ProyectoUseCaseImpl extends DefaultCRUDUseCase<ProyectoDomain> implements ProyectoUseCase {
 
@@ -22,7 +13,16 @@ public class ProyectoUseCaseImpl extends DefaultCRUDUseCase<ProyectoDomain> impl
     public ProyectoUseCaseImpl() {
         super.setRepo(repo);
     }
-
+    /*
+    
+    
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.diff.DiffEntry;
+import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+    
     @Override
     public boolean hasRemote(ProyectoDomain proyecto) {
         try {
@@ -38,7 +38,15 @@ public class ProyectoUseCaseImpl extends DefaultCRUDUseCase<ProyectoDomain> impl
         return false;
     }
 
+    /**
+     * No funciona, no se ha echo la integracion con git
+     *
+     * @param proyecto
+     * @throws Exception
+     * @deprecated
+     *
     @Override
+    @Deprecated
     public void updateRemote(ProyectoDomain proyecto) throws Exception {
         //creo el repo, con el .git detras
         Repository localRepo = new FileRepository(proyecto.getUrlLocal() + "\\.git");
@@ -94,12 +102,12 @@ public class ProyectoUseCaseImpl extends DefaultCRUDUseCase<ProyectoDomain> impl
                             "A123b456**"
                     )
             ).call();
-        }*/
+        }*
         //regreso a la rama original
         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SIMPLE_TEXT,
                 "Checkout para la rama original: " + actualBranch);
         git.checkout().setName(actualBranch).call();
         Notification.showNotification(NotificationsGeneralType.NOTIFICATION_SUCCESS,
                 "Actualizadas todas las ramas con el/los repos online");
-    }
+    }*/
 }
