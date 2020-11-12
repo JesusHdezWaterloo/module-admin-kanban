@@ -1,12 +1,15 @@
 package com.jhw.module.admin.kanban.core.usecase_impl;
 
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
+import com.jhw.module.admin.kanban.core.domain.ColumnaDomain;
 import com.jhw.module.admin.kanban.core.domain.ColumnaProyectVolatile;
 import com.jhw.module.admin.kanban.core.domain.TareaDomain;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.repo_def.TareaRepo;
 import com.jhw.module.admin.kanban.core.usecase_def.ColumnaUseCase;
 import com.jhw.module.admin.kanban.core.usecase_def.TareaUseCase;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements TareaUseCase {
 
     private final TareaRepo repo = KanbanCoreModule.getInstance().getImplementation(TareaRepo.class);
+    private final ColumnaUseCase columnaUC = KanbanCoreModule.getInstance().getImplementation(ColumnaUseCase.class);
 
     public TareaUseCaseImpl() {
         super.setRepo(repo);
@@ -32,23 +36,24 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     @Override
     public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile colProy) throws Exception {
         List<TareaDomain> l = repo.findByColumnaProyecto(colProy);
-        //si es de la ultima columna solo muestro el ultimo mes
-        if (colProy.getColumna().equals(KanbanCoreModule.getInstance().getImplementation(ColumnaUseCase.class).findLast())) {
-            Date lastMonth = new Date();
-            lastMonth.setMonth(lastMonth.getMonth() - 1);
 
+        //si es de la ultima columna solo muestro el ultimo mes
+        //si se quiere mostrar all comentar esta linea
+        if (colProy.getIdColumna().equals(columnaUC.findLast())) {//busca la ultima columna
+            LocalDate mesPasado = LocalDate.from(YearMonth.now().minusMonths(1));
             return l.stream().filter(
-                    (TareaDomain t) -> t.getLastChange().after(lastMonth)
+                    (TareaDomain t) -> t.getLastChange().isAfter(mesPasado)
             ).sorted().collect(Collectors.toList());
         } else {
             Collections.sort(l);
         }
+
         return l;
     }
 
     @Override
     public TareaDomain create(TareaDomain newObject) throws Exception {
-        newObject.setLastChange(new Date());
+        newObject.setLastChange(LocalDate.now());
         return super.create(newObject);
     }
 
@@ -58,8 +63,17 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
         if (!tarea.getProyectoFk().equals(objectToUpdate.getProyectoFk())) {
             throw new RuntimeException("No se puede mover una tarea de proyecto. Bórrela y creela de nuevo");
         }
-        objectToUpdate.setLastChange(new Date());
+        objectToUpdate.setLastChange(LocalDate.now());
         return super.edit(objectToUpdate);
+    }
+
+    @Override
+    public TareaDomain move(Integer idTarea, Integer idColumna) throws Exception {
+        TareaDomain tarea = findBy(idTarea);
+        ColumnaDomain col = columnaUC.findBy(idColumna);
+        tarea.setColumnaFk(col);
+
+        return this.edit(tarea);
     }
 
 }
