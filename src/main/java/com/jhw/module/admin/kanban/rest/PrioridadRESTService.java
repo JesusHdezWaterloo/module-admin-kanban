@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = PRIORIDAD_GENERAL_PATH)
 public class PrioridadRESTService extends RESTServiceTemplate<PrioridadDomain> implements PrioridadUseCase {
 
-    private final PrioridadUseCase prioridadUC = A_ModuleAdminKanbanEmpresarial.prioridadUC;
+    private final PrioridadUseCase prioridadUC = A_ModuleAdminKanban.prioridadUC;
 
     public PrioridadRESTService() {
         setUseCase(prioridadUC);

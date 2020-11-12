@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = KANBAN_GENERAL_PATH)
 public class ColumnaRESTService extends RESTServiceTemplate<ColumnaDomain> implements ColumnaUseCase {
 
-    private final ColumnaUseCase columnsUC = A_ModuleAdminKanbanEmpresarial.columnsUC;
+    private final ColumnaUseCase columnsUC = A_ModuleAdminKanban.columnsUC;
 
     public ColumnaRESTService() {
         setUseCase(columnsUC);

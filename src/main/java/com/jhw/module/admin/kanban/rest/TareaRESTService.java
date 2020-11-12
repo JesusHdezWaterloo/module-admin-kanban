@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = TAREA_GENERAL_PATH)
 public class TareaRESTService extends RESTServiceTemplate<TareaDomain> implements TareaUseCase {
 
-    private final TareaUseCase tareaUC = A_ModuleAdminKanbanEmpresarial.tareaUC;
+    private final TareaUseCase tareaUC = A_ModuleAdminKanban.tareaUC;
 
     public TareaRESTService() {
         setUseCase(tareaUC);

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = PROYECTO_GENERAL_PATH)
 public class ProyectoRESTService extends RESTServiceTemplate<ProyectoDomain> implements ProyectoUseCase {
 
-    private final ProyectoUseCase proyectoUC = A_ModuleAdminKanbanEmpresarial.proyectoUC;
+    private final ProyectoUseCase proyectoUC = A_ModuleAdminKanban.proyectoUC;
 
     public ProyectoRESTService() {
         setUseCase(proyectoUC);
