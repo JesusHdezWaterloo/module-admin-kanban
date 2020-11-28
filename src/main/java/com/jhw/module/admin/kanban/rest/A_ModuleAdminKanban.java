@@ -8,8 +8,9 @@ package com.jhw.module.admin.kanban.rest;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.usecase_def.*;
 import com.jhw.module.admin.kanban.repo.module.KanbanRepoModule;
-import com.jhw.module.admin.kanban.service.ResourceServiceImplementation;
+import com.jhw.module.admin.kanban.service.ResourceServiceServerImplementation;
 import org.springframework.stereotype.Component;
+import com.jhw.module.admin.kanban.service.ResourceServiceImplementation;
 
 /**
  *
@@ -26,13 +27,15 @@ public class A_ModuleAdminKanban {
     public final static TareaUseCase tareaUC;
 
     static {
-        ResourceServiceImplementation.init();
+        ResourceServiceImplementation.init();//creo el resource general
+        ResourceServiceServerImplementation.init();//creo el resource general
+
         KanbanCoreModule.init(KanbanRepoModule.init());
 
         columnsUC = KanbanCoreModule.getInstance().getImplementation(ColumnaUseCase.class);
         prioridadUC = KanbanCoreModule.getInstance().getImplementation(PrioridadUseCase.class);
         proyectoUC = KanbanCoreModule.getInstance().getImplementation(ProyectoUseCase.class);
         tareaUC = KanbanCoreModule.getInstance().getImplementation(TareaUseCase.class);
-        
+
     }
 }
