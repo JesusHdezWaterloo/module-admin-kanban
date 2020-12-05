@@ -4,6 +4,7 @@ import com.clean.core.app.modules.AbstractModule;
 import com.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.jhw.module.admin.kanban.repo.module.KanbanRepoModule;
 
 /**
  * Modulo de Kanban-core.
@@ -23,6 +24,23 @@ public class KanbanCoreModule extends DefaultAbstractModule {
         return INSTANCE;
     }
 
+    public static KanbanCoreModule init() {
+        if (INSTANCE != null) {
+            return INSTANCE;
+        }
+        INSTANCE = new KanbanCoreModule();
+        INSTANCE.registerModule(KanbanRepoModule.init());
+        return getInstance();
+    }
+
+    /**
+     * Usar init() sin repo por parametro para usar el repo por defecto
+     *
+     * @param repoModule
+     * @return
+     * @deprecated
+     */
+    @Deprecated
     public static KanbanCoreModule init(AbstractModule repoModule) {
         INSTANCE = new KanbanCoreModule();
         INSTANCE.registerModule(repoModule);

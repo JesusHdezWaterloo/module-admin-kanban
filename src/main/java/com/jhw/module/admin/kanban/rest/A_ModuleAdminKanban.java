@@ -30,7 +30,7 @@ public class A_ModuleAdminKanban {
         ResourceServiceImplementation.init();//creo el resource general
         ResourceServiceServerImplementation.init();//creo el resource general
 
-        KanbanCoreModule.init(KanbanRepoModule.init());
+        KanbanCoreModule.init();
 
         columnsUC = KanbanCoreModule.getInstance().getImplementation(ColumnaUseCase.class);
         prioridadUC = KanbanCoreModule.getInstance().getImplementation(PrioridadUseCase.class);
