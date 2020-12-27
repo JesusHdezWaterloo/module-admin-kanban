@@ -1,6 +1,7 @@
 package com.jhw.module.admin.kanban.core.usecase_impl;
 
 import com.clean.core.app.usecase.DefaultCRUDUseCase;
+import com.clean.core.utils.Licenced;
 import com.jhw.module.admin.kanban.core.domain.ColumnaDomain;
 import com.jhw.module.admin.kanban.core.domain.ColumnaProyectVolatile;
 import com.jhw.module.admin.kanban.core.domain.MoveTarea;
@@ -10,11 +11,8 @@ import com.jhw.module.admin.kanban.core.repo_def.TareaRepo;
 import com.jhw.module.admin.kanban.core.usecase_def.ColumnaUseCase;
 import com.jhw.module.admin.kanban.core.usecase_def.TareaUseCase;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements TareaUseCase {
@@ -53,12 +51,14 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     }
 
     @Override
+    @Licenced
     public TareaDomain create(TareaDomain newObject) throws Exception {
         newObject.setLastChange(LocalDate.now());
         return super.create(newObject);
     }
 
     @Override
+    @Licenced
     public TareaDomain edit(TareaDomain objectToUpdate) throws Exception {
         TareaDomain tarea = findBy(objectToUpdate.getIdTarea());
         if (!tarea.getProyectoFk().equals(objectToUpdate.getProyectoFk())) {
