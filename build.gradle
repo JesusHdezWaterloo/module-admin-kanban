@@ -4,13 +4,12 @@ plugins {
 
 group = 'com.jhw.module.admin'
 
-version = '2.3.0.SNAPSHOT.20201219'
+version = '2.4.0.SNAPSHOT.20201228'
 
 repositories {
     jcenter()
     mavenCentral()
 }
-
 
 dependencies {
     compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
@@ -25,6 +24,8 @@ dependencies {
     implementation project(':module-util-mysql')
     
     implementation project(':module-admin-kanban-standard')
+    
+    implementation project(':module-util-licence-server')
     
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
     
