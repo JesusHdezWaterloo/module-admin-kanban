@@ -2,10 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="KanbanPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.jhw.module.admin.kanban.repo.entities.Columna</class>
-    <class>com.jhw.module.admin.kanban.repo.entities.Prioridad</class>
-    <class>com.jhw.module.admin.kanban.repo.entities.Proyecto</class>
-    <class>com.jhw.module.admin.kanban.repo.entities.Tarea</class>
     <class>com.jhw.module.gestion.contabilidad.repo.entities.Cuadre</class>
     <class>com.jhw.module.gestion.contabilidad.repo.entities.CuentaBancaria</class>
     <class>com.jhw.module.gestion.contabilidad.repo.entities.CuentaContable</class>
@@ -18,6 +14,10 @@
     <class>com.jhw.module.gestion.contabilidad.repo.entities.TipoCuenta</class>
     <class>com.jhw.module.gestion.contabilidad.repo.entities.TipoOperacionContable</class>
     <class>com.jhw.module.gestion.contabilidad.repo.entities.Titular</class>
+    <class>com.root101.module.admin.kanban.repo.entities.Prioridad</class>
+    <class>com.root101.module.admin.kanban.repo.entities.Columna</class>
+    <class>com.root101.module.admin.kanban.repo.entities.Proyecto</class>
+    <class>com.root101.module.admin.kanban.repo.entities.Tarea</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:7733/admin_kanban?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
