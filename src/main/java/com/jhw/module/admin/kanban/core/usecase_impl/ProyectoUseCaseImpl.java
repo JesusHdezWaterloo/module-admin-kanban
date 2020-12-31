@@ -1,6 +1,6 @@
 package com.jhw.module.admin.kanban.core.usecase_impl;
 
-import com.clean.core.app.usecase.DefaultCRUDUseCase;
+import com.root101.clean.core.app.usecase.DefaultCRUDUseCase;
 import com.jhw.module.admin.kanban.core.domain.ProyectoDomain;
 import com.jhw.module.admin.kanban.core.module.KanbanCoreModule;
 import com.jhw.module.admin.kanban.core.repo_def.ProyectoRepo;

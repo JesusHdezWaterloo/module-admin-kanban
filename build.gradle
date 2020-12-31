@@ -16,7 +16,7 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
     testImplementation 'junit:junit:4.13'
 
-    implementation project(':clean-core-full')
+    implementation project(':clean-core')
     
     implementation project(':utils-core')
     implementation project(':utils-spring')
