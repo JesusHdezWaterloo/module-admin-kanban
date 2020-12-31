@@ -27,7 +27,7 @@ import javax.persistence.Persistence;
  */
 public class ResourcesKanban {
 
-    public static final String SCHEMA = "admin_kanban";
+    public static final String SCHEMA = "root101_admin_kanban";
             
     public static EntityManagerFactory EMF;
 
