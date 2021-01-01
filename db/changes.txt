@@ -6,3 +6,11 @@ ALTER TABLE `tarea` ADD `last_change` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP AF
 //Unique en codigo-proyecto
 ALTER TABLE `tarea` DROP INDEX `codigo_tarea`;
 ALTER TABLE `tarea` ADD UNIQUE KEY `UNIQUE_COD_PROY` (`codigo_tarea`,`proyecto_fk`);
+
+
+//Ultima DB: 5
+//sin cambios
+
+//Ultima DB: 6
+//sin cambios
+Rename de admin_kanban => root101_admin_kanban
