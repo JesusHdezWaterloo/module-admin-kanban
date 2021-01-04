@@ -23,7 +23,6 @@ import com.google.inject.Injector;
 import com.root101.clean.core.domain.services.ResourceHandler;
 import com.root101.clean.core.exceptions.AlreadyInitModule;
 import com.root101.clean.core.exceptions.NotInitModule;
-import com.root101.module.admin.kanban.repo.module.KanbanRepoModule;
 import com.root101.module.admin.kanban.service.ResourceKeys;
 
 /**
