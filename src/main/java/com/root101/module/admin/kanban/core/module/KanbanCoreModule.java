@@ -20,7 +20,11 @@ import com.root101.clean.core.app.modules.AbstractModule;
 import com.root101.clean.core.app.modules.DefaultAbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.root101.clean.core.domain.services.ResourceHandler;
+import com.root101.clean.core.exceptions.AlreadyInitModule;
+import com.root101.clean.core.exceptions.NotInitModule;
 import com.root101.module.admin.kanban.repo.module.KanbanRepoModule;
+import com.root101.module.admin.kanban.service.ResourceKeys;
 
 /**
  *
@@ -35,18 +39,9 @@ public class KanbanCoreModule extends DefaultAbstractModule {
 
     public static KanbanCoreModule getInstance() {
         if (INSTANCE == null) {
-            throw new NullPointerException("El modulo de Kanban no se ha inicializado");
+            throw new NotInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
         }
         return INSTANCE;
-    }
-
-    public static KanbanCoreModule init() {
-        if (INSTANCE != null) {
-            return INSTANCE;
-        }
-        INSTANCE = new KanbanCoreModule();
-        INSTANCE.registerModule(KanbanRepoModule.init());
-        return getInstance();
     }
 
     /**
@@ -56,8 +51,10 @@ public class KanbanCoreModule extends DefaultAbstractModule {
      * @return
      * @deprecated
      */
-    @Deprecated
     public static KanbanCoreModule init(AbstractModule repoModule) {
+        if (INSTANCE != null) {
+            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
+        }
         INSTANCE = new KanbanCoreModule();
         INSTANCE.registerModule(repoModule);
         return getInstance();
