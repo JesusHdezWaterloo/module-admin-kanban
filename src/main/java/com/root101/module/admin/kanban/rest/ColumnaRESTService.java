@@ -16,7 +16,7 @@
  */
 package com.root101.module.admin.kanban.rest;
 
-import static com.root101.module.admin.kanban.core.ModuleAdminKanbanConstants.*;
+import static com.root101.module.admin.kanban.rest.ModuleAdminKanbanRESTConstants.*;
 import com.root101.module.admin.kanban.core.domain.*;
 import com.root101.module.admin.kanban.core.usecase_def.*;
 import com.jhw.utils.spring.server.*;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = COLUMMA_GENERAL_PATH)
 public class ColumnaRESTService extends RESTServiceTemplate<ColumnaDomain> implements ColumnaUseCase {
 
-    private final ColumnaUseCase columnsUC = A_ModuleAdminKanban.columnsUC;
+    private final ColumnaUseCase columnsUC = A_ModuleAdminKanbanRESTConfig.columnsUC;
 
     public ColumnaRESTService() {
         setUseCase(columnsUC);
