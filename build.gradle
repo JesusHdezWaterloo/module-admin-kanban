@@ -25,7 +25,7 @@ dependencies {
     
     implementation project(':module-admin-kanban-standard')
     
-    implementation project(':module-util-licence-server')
+    implementation project(':module-control-licence-server')
     
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
     

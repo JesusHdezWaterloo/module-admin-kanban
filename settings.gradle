@@ -15,9 +15,9 @@ project(':module-util-mysql').projectDir = "E:\\Trabajos\\Projects\\GIT Projects
 include ':module-admin-kanban-standard'
 project(':module-admin-kanban-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-admin-kanban-standard" as File
 
-include ':module-util-licence-server'
-project(':module-util-licence-server').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-licence-server" as File
+include ':module-control-licence-server'
+project(':module-control-licence-server').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-control-licence-server" as File
 
-include ':module-util-licence-standard'
-project(':module-util-licence-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-util-licence-standard" as File
+include ':module-control-licence-standard'
+project(':module-control-licence-standard').projectDir = "E:\\Trabajos\\Projects\\GIT Projects Gradle\\module-control-licence-standard" as File
 
