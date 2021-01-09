@@ -44,7 +44,7 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) {//TODO: por que no lanzar excepcion y ya
         EntityManager em = getEntityManager();
 
         try {

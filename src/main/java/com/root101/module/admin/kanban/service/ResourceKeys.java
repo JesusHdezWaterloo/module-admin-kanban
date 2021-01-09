@@ -14,27 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.root101.module.admin.kanban.rest;
-
-import com.root101.spring.server.RESTServiceTemplate;
-import static com.root101.module.admin.kanban.rest.ModuleAdminKanbanRESTConstants.*;
-import com.root101.module.admin.kanban.core.domain.*;
-import com.root101.module.admin.kanban.core.usecase_def.*;
-import org.springframework.web.bind.annotation.*;
+package com.root101.module.admin.kanban.service;
 
 /**
  *
  * @author Root101 (jhernandezb96@gmail.com, +53-5-426-8660)
  * @author JesusHdezWaterloo@Github
  */
-@RestController
-@RequestMapping(value = PROYECTO_GENERAL_PATH)
-public class ProyectoRESTService extends RESTServiceTemplate<ProyectoDomain> implements ProyectoUseCase {
+public class ResourceKeys {
 
-    private final ProyectoUseCase proyectoUC = A_ModuleAdminKanbanRESTConfig.proyectoUC;
-
-    public ProyectoRESTService() {
-        setUseCase(proyectoUC);
-    }
+    public static final String KEY_MODULE_NAME_KANBAN = "com.root101.module.admin.kanban.name";
 
 }

@@ -16,10 +16,10 @@
  */
 package com.root101.module.admin.kanban.rest;
 
-import static com.root101.module.admin.kanban.core.ModuleAdminKanbanConstants.*;
+import com.root101.spring.server.RESTServiceTemplate;
+import static com.root101.module.admin.kanban.rest.ModuleAdminKanbanRESTConstants.*;
 import com.root101.module.admin.kanban.core.domain.*;
 import com.root101.module.admin.kanban.core.usecase_def.*;
-import com.jhw.utils.spring.server.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = PRIORIDAD_GENERAL_PATH)
 public class PrioridadRESTService extends RESTServiceTemplate<PrioridadDomain> implements PrioridadUseCase {
 
-    private final PrioridadUseCase prioridadUC = A_ModuleAdminKanban.prioridadUC;
+    private final PrioridadUseCase prioridadUC = A_ModuleAdminKanbanRESTConfig.prioridadUC;
 
     public PrioridadRESTService() {
         setUseCase(prioridadUC);
