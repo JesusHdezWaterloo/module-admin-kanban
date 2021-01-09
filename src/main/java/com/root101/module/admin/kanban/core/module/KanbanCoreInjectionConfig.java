@@ -37,7 +37,7 @@ public class KanbanCoreInjectionConfig extends LicenceInjectionConfig {
     @Override
     protected void configure() {
         super.configure();//configura la licencia
-        
+
         bind(ColumnaUseCase.class).to(ColumnaUseCaseImpl.class).in(Singleton.class);
         bind(PrioridadUseCase.class).to(PrioridadUseCaseImpl.class).in(Singleton.class);
         bind(ProyectoUseCase.class).to(ProyectoUseCaseImpl.class).in(Singleton.class);
