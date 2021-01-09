@@ -25,7 +25,7 @@ import com.root101.module.admin.kanban.core.usecase_impl.ColumnaUseCaseImpl;
 import com.root101.module.admin.kanban.core.usecase_impl.PrioridadUseCaseImpl;
 import com.root101.module.admin.kanban.core.usecase_impl.ProyectoUseCaseImpl;
 import com.root101.module.admin.kanban.core.usecase_impl.TareaUseCaseImpl;
-import com.jhw.module.util.licence.core.injection.LicenceInjectionConfig;
+import com.root101.module.control.licence.core.injection.LicenceInjectionConfig;
 
 /**
  *
@@ -37,7 +37,7 @@ public class KanbanCoreInjectionConfig extends LicenceInjectionConfig {
     @Override
     protected void configure() {
         super.configure();//configura la licencia
-        
+
         bind(ColumnaUseCase.class).to(ColumnaUseCaseImpl.class).in(Singleton.class);
         bind(PrioridadUseCase.class).to(PrioridadUseCaseImpl.class).in(Singleton.class);
         bind(ProyectoUseCase.class).to(ProyectoUseCaseImpl.class).in(Singleton.class);
