@@ -28,3 +28,5 @@ hs_err_pid*
 build/
 css_batick_default_override.css
 
+
+src/main/java/com/root101/module/admin/kanban/MainTest.java

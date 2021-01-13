@@ -63,12 +63,12 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
      * No funciona, no se ha echo la integracion con git
      *
      * @param proyecto
-     * @throws Exception
+     * @throws RuntimeException
      * @deprecated
      *
     @Override
     @Deprecated
-    public void updateRemote(ProyectoDomain proyecto) throws Exception {
+    public void updateRemote(ProyectoDomain proyecto) throws RuntimeException {
         //creo el repo, con el .git detras
         Repository localRepo = new FileRepository(proyecto.getUrlLocal() + "\\.git");
 

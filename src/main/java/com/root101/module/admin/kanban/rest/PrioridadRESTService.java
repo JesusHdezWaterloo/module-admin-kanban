@@ -40,7 +40,7 @@ public class PrioridadRESTService extends RESTServiceTemplate<PrioridadDomain> i
 
     @Override
     @GetMapping(PRIORIDAD_FIND_ALL_SEARCH_PATH)
-    public List<PrioridadDomain> findAll(@PathVariable(SEARCH) String searchText) throws Exception {
+    public List<PrioridadDomain> findAll(@PathVariable(SEARCH) String searchText) throws RuntimeException {
         return prioridadUC.findAll(searchText);
     }
 

@@ -28,6 +28,6 @@ import java.util.List;
  */
 public interface TareaRepo extends CRUDRepository<TareaDomain> {
 
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy);
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws RuntimeException;
 
 }
