@@ -16,7 +16,6 @@
  */
 package com.root101.module.admin.kanban.repo.utils;
 
-import com.root101.clean.core.app.services.ExceptionHandler;
 import com.root101.module.util.mysql.services.MySQLHandler;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -33,10 +32,6 @@ public class ResourcesKanban {
     public static EntityManagerFactory EMF;
 
     public static void initEMF() {
-        try {
-            EMF = Persistence.createEntityManagerFactory("KanbanPU", MySQLHandler.propertiesMap(SCHEMA));
-        } catch (Exception e) {
-            ExceptionHandler.handleException(e);
-        }
+        EMF = Persistence.createEntityManagerFactory("KanbanPU", MySQLHandler.propertiesMap(SCHEMA));
     }
 }
