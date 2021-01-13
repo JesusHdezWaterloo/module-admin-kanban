@@ -39,18 +39,18 @@ public class TareaRESTService extends RESTServiceTemplate<TareaDomain> implement
     }
 
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws RuntimeException {
         return tareaUC.findByColumnaProyecto(colProy);
     }
 
     @GetMapping(TAREA_FIND_BY_COL_PROY_PATH)
-    public List<TareaDomain> findByColumnaProyecto(@PathVariable(PROYECTO) Integer idProyecto, @PathVariable(COLUMNA) Integer idColumna) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(@PathVariable(PROYECTO) Integer idProyecto, @PathVariable(COLUMNA) Integer idColumna) throws RuntimeException {
         return tareaUC.findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth.from(idProyecto, idColumna));
     }
 
     @Override
     @PostMapping(TAREA_MOVE_PATH)
-    public TareaDomain move(@RequestBody MoveTarea move) throws Exception {
+    public TareaDomain move(@RequestBody MoveTarea move) throws RuntimeException {
         return tareaUC.move(move);
     }
 

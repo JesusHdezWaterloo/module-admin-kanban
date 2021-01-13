@@ -51,10 +51,10 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
      *
      * @param colProy
      * @return
-     * @throws Exception
+     * @throws RuntimeException
      */
     @Override
-    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws Exception {
+    public List<TareaDomain> findByColumnaProyecto(ColumnaProyectVolatile.LightWeigth colProy) throws RuntimeException {
         List<TareaDomain> l = repo.findByColumnaProyecto(colProy);
 
         //si es de la ultima columna solo muestro el ultimo mes
@@ -73,14 +73,14 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
 
     @Override
     @Licenced
-    public TareaDomain create(TareaDomain newObject) throws Exception {
+    public TareaDomain create(TareaDomain newObject) throws RuntimeException {
         newObject.setLastChange(LocalDate.now());
         return super.create(newObject);
     }
 
     @Override
     @Licenced
-    public TareaDomain edit(TareaDomain objectToUpdate) throws Exception {
+    public TareaDomain edit(TareaDomain objectToUpdate) throws RuntimeException {
         TareaDomain tarea = findBy(objectToUpdate.getIdTarea());
         if (!tarea.getProyectoFk().equals(objectToUpdate.getProyectoFk())) {
             throw new RuntimeException("No se puede mover una tarea de proyecto. Bórrela y creela de nuevo");
@@ -90,7 +90,7 @@ public class TareaUseCaseImpl extends DefaultCRUDUseCase<TareaDomain> implements
     }
 
     @Override
-    public TareaDomain move(MoveTarea move) throws Exception {
+    public TareaDomain move(MoveTarea move) throws RuntimeException {
         TareaDomain tarea = findBy(move.getIdTarea());
         ColumnaDomain col = columnaUC.findBy(move.getIdColumna());
         tarea.setColumnaFk(col);

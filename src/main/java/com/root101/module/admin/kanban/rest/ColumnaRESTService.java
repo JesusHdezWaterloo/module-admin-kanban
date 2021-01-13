@@ -39,13 +39,13 @@ public class ColumnaRESTService extends RESTServiceTemplate<ColumnaDomain> imple
 
     @Override
     @GetMapping(COLUMNA_FIND_FIRST_PATH)
-    public ColumnaDomain findFirst() throws Exception {
+    public ColumnaDomain findFirst() throws RuntimeException {
         return columnsUC.findFirst();
     }
 
     @Override
     @GetMapping(COLUMNA_FIND_LAST_PATH)
-    public ColumnaDomain findLast() throws Exception {
+    public ColumnaDomain findLast() throws RuntimeException {
         return columnsUC.findLast();
     }
 
