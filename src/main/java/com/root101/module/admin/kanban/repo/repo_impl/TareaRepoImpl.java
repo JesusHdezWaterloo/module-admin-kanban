@@ -22,7 +22,7 @@ import com.root101.module.admin.kanban.repo.entities.*;
 import com.root101.module.admin.kanban.repo.module.KanbanRepoModule;
 import com.root101.module.admin.kanban.repo.utils.ResourcesKanban;
 import com.root101.repo.jpa.JPACleanCRUDRepo;
-import com.root101.utils.services.ConverterService;
+import com.root101.clean.core.app.services.ConverterHandler;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -49,7 +49,7 @@ public class TareaRepoImpl extends JPACleanCRUDRepo<TareaDomain, Tarea> implemen
                     .setParameter("idProyecto", colProy.idProyecto)
                     .setParameter("idColumna", colProy.idColumna)
                     .getResultList();
-            return ConverterService.convert(list, TareaDomain.class);
+            return ConverterHandler.convert(list, TareaDomain.class);
         } catch (Exception e) {
             return new ArrayList<>();
         } finally {
