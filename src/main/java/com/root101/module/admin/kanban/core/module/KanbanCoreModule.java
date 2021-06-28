@@ -23,7 +23,7 @@ import com.google.inject.Injector;
 import com.root101.clean.core.domain.services.ResourceHandler;
 import com.root101.clean.core.exceptions.AlreadyInitModule;
 import com.root101.clean.core.exceptions.NotInitModule;
-import com.root101.module.admin.kanban.service.ResourceKeys;
+import com.root101.module.admin.kanban.service.ResourceKeysServer;
 
 /**
  *
@@ -38,7 +38,7 @@ public class KanbanCoreModule extends DefaultAbstractModule {
 
     public static KanbanCoreModule getInstance() {
         if (INSTANCE == null) {
-            throw new NotInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
+            throw new NotInitModule(ResourceHandler.getString(ResourceKeysServer.KEY_MODULE_NAME_KANBAN));
         }
         return INSTANCE;
     }
@@ -52,7 +52,7 @@ public class KanbanCoreModule extends DefaultAbstractModule {
      */
     public static KanbanCoreModule init(AbstractModule repoModule) {
         if (INSTANCE != null) {
-            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
+            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeysServer.KEY_MODULE_NAME_KANBAN));
         }
         INSTANCE = new KanbanCoreModule();
         INSTANCE.registerModule(repoModule);

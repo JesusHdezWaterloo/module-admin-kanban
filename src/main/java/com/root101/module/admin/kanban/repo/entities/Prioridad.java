@@ -38,8 +38,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author JesusHdezWaterloo@Github
  */
 @Entity
-@Table(name = "prioridad", schema = ResourcesKanban.SCHEMA, uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"nombre_prioridad"})})
+@Table(name = "prioridad",
+        catalog = ResourcesKanban.SCHEMA_CATALOG,
+        schema = ResourcesKanban.SCHEMA_CATALOG,
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"nombre_prioridad"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prioridad.findAll", query = "SELECT p FROM Prioridad p"),
