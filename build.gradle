@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.root101.module.admin'
 
-version = '4.0.0.SNAPSHOT.20210627'
+version = '5.0.0.SNAPSHOT.20210628'
 
 repositories {
     jcenter()
@@ -14,7 +14,6 @@ repositories {
 dependencies {
     implementation 'org.springframework:spring-web:5.2.9.RELEASE'
     implementation 'org.springframework:spring-context:5.2.9.RELEASE'
-    testImplementation 'junit:junit:4.13'
 
     implementation project(':clean-core')
     
@@ -22,23 +21,20 @@ dependencies {
     implementation project(':utils-spring')
     
     implementation project(':module-util-mysql')
-    
-    implementation project(':module-admin-kanban-standard')
-    
+        
     implementation project(':module-control-licence-server')
     
-    implementation 'mysql:mysql-connector-java:8.0.25'
+    //validation
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'javax.persistence:javax.persistence-api:2.2'
     
-    //EclipseLink
+    //DB
+    implementation 'mysql:mysql-connector-java:8.0.25'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.eclipse.persistence:eclipselink:3.0.2-RC1'
     implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:3.0.2-RC1'
     implementation 'org.hibernate:hibernate-core:5.5.3.Final'
     
     //injection
     implementation 'com.google.inject:guice:5.0.1'
-    
-    
 }
