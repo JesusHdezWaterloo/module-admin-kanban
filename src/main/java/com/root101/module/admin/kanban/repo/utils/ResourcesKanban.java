@@ -27,11 +27,11 @@ import javax.persistence.Persistence;
  */
 public class ResourcesKanban {
 
-    public static final String SCHEMA = "root101_admin_kanban";
+    public static final String SCHEMA_CATALOG = "root101_admin_kanban";
 
     public static EntityManagerFactory EMF;
 
     public static void initEMF() {
-        EMF = Persistence.createEntityManagerFactory("KanbanPU", MySQLHandler.propertiesMap(SCHEMA));
+        EMF = Persistence.createEntityManagerFactory("KanbanPU", MySQLHandler.propertiesMap(SCHEMA_CATALOG));
     }
 }
