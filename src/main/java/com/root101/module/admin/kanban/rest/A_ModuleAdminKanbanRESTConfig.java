@@ -20,8 +20,7 @@ import com.root101.clean.core.domain.services.ResourceHandler;
 import com.root101.module.admin.kanban.core.module.KanbanCoreModule;
 import com.root101.module.admin.kanban.core.usecase_def.*;
 import com.root101.module.admin.kanban.repo.module.KanbanRepoModule;
-import com.root101.module.admin.kanban.service.ResourceKeysServer;
-import com.root101.module.admin.kanban.service.ResourceKeysStandard;
+import com.root101.module.admin.kanban.service.ResourceKeys;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,8 +39,7 @@ public class A_ModuleAdminKanbanRESTConfig {
     public final static TareaUseCase tareaUC;
 
     static {
-        ResourceHandler.registerInternal(ResourceKeysServer.RESOURCE_URL);
-        ResourceHandler.registerInternal(ResourceKeysStandard.RESOURCE_URL);
+        ResourceHandler.registerInternal(ResourceKeys.RESOURCE_URL);
 
         KanbanCoreModule.init(KanbanRepoModule.init());
 

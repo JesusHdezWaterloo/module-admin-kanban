@@ -23,7 +23,7 @@ import com.root101.clean.core.domain.services.ResourceHandler;
 import com.root101.clean.core.exceptions.AlreadyInitModule;
 import com.root101.clean.core.exceptions.NotInitModule;
 import com.root101.module.admin.kanban.repo.utils.ResourcesKanban;
-import com.root101.module.admin.kanban.service.ResourceKeysServer;
+import com.root101.module.admin.kanban.service.ResourceKeys;
 
 /**
  *
@@ -42,14 +42,14 @@ public class KanbanRepoModule extends DefaultAbstractModule {
 
     public static KanbanRepoModule getInstance() {
         if (INSTANCE == null) {
-            throw new NotInitModule(ResourceHandler.getString(ResourceKeysServer.KEY_MODULE_NAME_KANBAN));
+            throw new NotInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
         }
         return INSTANCE;
     }
 
     public static KanbanRepoModule init() {
         if (INSTANCE != null) {
-            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeysServer.KEY_MODULE_NAME_KANBAN));
+            throw new AlreadyInitModule(ResourceHandler.getString(ResourceKeys.KEY_MODULE_NAME_KANBAN));
         }
         INSTANCE = new KanbanRepoModule();
         return getInstance();
